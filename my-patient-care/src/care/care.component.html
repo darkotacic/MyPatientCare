@@ -1,0 +1,25 @@
+<ActionBar class="action-bar">
+    <Label class="action-bar-title" [text]="title"></Label>
+    <ActionItem (tap)="onSettings()" ios.systemIcon="16" ios.position="right" text="Settings" android.position="popup" ></ActionItem>
+    <ActionItem (tap)="onLogOut()" ios.systemIcon="16" ios.position="right" text="Log Out" android.position="popup" ></ActionItem>
+</ActionBar>
+
+<TabView class="tab-view" (selectedIndexChanged)="onSelectedIndexChanged($event)">
+
+    <StackLayout *tabItem="{title: 'Appointments', iconSource: getIconSource('home')}">
+        <Appointments></Appointments>
+    </StackLayout>
+
+    <StackLayout *tabItem="{title: 'New appointment', iconSource: getIconSource('search')}">
+        <Treatments></Treatments>
+    </StackLayout>
+
+    <StackLayout *tabItem="{title: 'Contact', iconSource: getIconSource('search')}">
+        <Connect></Connect>
+    </StackLayout>
+
+    <StackLayout *tabItem="{title: 'About us', iconSource: getIconSource('search')}">
+        <AboutUs></AboutUs>
+    </StackLayout>
+
+</TabView>

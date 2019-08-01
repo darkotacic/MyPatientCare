@@ -1,0 +1,17 @@
+C:\Users\darko\source\repos\WebRegisterAPI\WebRegisterAPI\bin\Debug\netcoreapp2.2\appsettings.Development.json
+C:\Users\darko\source\repos\WebRegisterAPI\WebRegisterAPI\bin\Debug\netcoreapp2.2\appsettings.json
+C:\Users\darko\source\repos\WebRegisterAPI\WebRegisterAPI\bin\Debug\netcoreapp2.2\Properties\launchSettings.json
+C:\Users\darko\source\repos\WebRegisterAPI\WebRegisterAPI\bin\Debug\netcoreapp2.2\WebRegisterAPI.deps.json
+C:\Users\darko\source\repos\WebRegisterAPI\WebRegisterAPI\bin\Debug\netcoreapp2.2\WebRegisterAPI.runtimeconfig.json
+C:\Users\darko\source\repos\WebRegisterAPI\WebRegisterAPI\bin\Debug\netcoreapp2.2\WebRegisterAPI.runtimeconfig.dev.json
+C:\Users\darko\source\repos\WebRegisterAPI\WebRegisterAPI\bin\Debug\netcoreapp2.2\WebRegisterAPI.dll
+C:\Users\darko\source\repos\WebRegisterAPI\WebRegisterAPI\bin\Debug\netcoreapp2.2\WebRegisterAPI.pdb
+C:\Users\darko\source\repos\WebRegisterAPI\WebRegisterAPI\obj\Debug\netcoreapp2.2\WebRegisterAPI.csprojAssemblyReference.cache
+C:\Users\darko\source\repos\WebRegisterAPI\WebRegisterAPI\obj\Debug\netcoreapp2.2\WebRegisterAPI.csproj.CoreCompileInputs.cache
+C:\Users\darko\source\repos\WebRegisterAPI\WebRegisterAPI\obj\Debug\netcoreapp2.2\WebRegisterAPI.RazorAssemblyInfo.cache
+C:\Users\darko\source\repos\WebRegisterAPI\WebRegisterAPI\obj\Debug\netcoreapp2.2\WebRegisterAPI.RazorAssemblyInfo.cs
+C:\Users\darko\source\repos\WebRegisterAPI\WebRegisterAPI\obj\Debug\netcoreapp2.2\WebRegisterAPI.AssemblyInfoInputs.cache
+C:\Users\darko\source\repos\WebRegisterAPI\WebRegisterAPI\obj\Debug\netcoreapp2.2\WebRegisterAPI.AssemblyInfo.cs
+C:\Users\darko\source\repos\WebRegisterAPI\WebRegisterAPI\obj\Debug\netcoreapp2.2\WebRegisterAPI.RazorTargetAssemblyInfo.cache
+C:\Users\darko\source\repos\WebRegisterAPI\WebRegisterAPI\obj\Debug\netcoreapp2.2\WebRegisterAPI.dll
+C:\Users\darko\source\repos\WebRegisterAPI\WebRegisterAPI\obj\Debug\netcoreapp2.2\WebRegisterAPI.pdb

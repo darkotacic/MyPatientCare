@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="Configuration">
+        <SwitchPreference
+            android:key="enabled_preference"
+            android:title="Notifications"
+            android:summary="Turn reminder notification"
+            android:defaultValue="false" />
+        <EditTextPreference
+            android:title="Appointment reminder"
+            android:summary="Set notification reminder in minutes"
+            android:key="reminder"
+            android:defaultValue="60"
+            android:numeric="integer"/>
+    </PreferenceCategory>
+</PreferenceScreen>
