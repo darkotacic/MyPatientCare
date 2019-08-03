@@ -2,3 +2,12 @@
     border-color: lightblue;
     border-width: 5;
 }
+
+.label {
+    text-align:center;
+    font-size: 20;
+}
+
+.p-t-10 {
+    padding-top:10;
+}

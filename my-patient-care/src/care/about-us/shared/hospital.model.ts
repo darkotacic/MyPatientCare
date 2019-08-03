@@ -1,10 +1,9 @@
 export class Hospital {
     public id: number;
-    public date: Date;
-    public stringDate: string;
-    public doctorId: string;
-    public doctorName: string;
-    public appointmentStatus: string;
-    public treatmentName: string;
-    public treatmentId: number;
+    public name: string;
+    public address: string;
+    public phoneNumber: string;
+    public directorName: string;
+    public latitude: number;
+    public longitude: number;
 }

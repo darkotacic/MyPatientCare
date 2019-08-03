@@ -14,6 +14,6 @@ export class HospitalService {
   }
 
   getHospitalInfo() {
-    //return  this.http.get(this.BaseURI+'/Treatment/Treatments');
+    return  this.http.get(this.BaseURI+'/Hospital/HospitalInfo');
   }
 }
