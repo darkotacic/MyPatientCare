@@ -1,8 +1,9 @@
 import { HospitalService } from './shared/hospital.service';
-import { OnInit, Component, ViewChild } from "@angular/core";
+import { OnInit, Component } from "@angular/core";
 import { Hospital } from './shared/hospital.model';
 import { registerElement } from 'nativescript-angular/element-registry';
 import { MapView, Marker, Position } from 'nativescript-google-maps-sdk';
+import * as utils from "tns-core-modules/utils/utils";
 
 
 // Important - must register MapView plugin in order to use in Angular templates
@@ -20,9 +21,7 @@ export class AboutUsComponent implements OnInit {
     hospital: Hospital;
     isLoaded: boolean;
 
-    latitude =  -33.86;
-    longitude = 151.20;
-    zoom = 8;
+    zoom = 17;
     minZoom = 0;
     maxZoom = 22;
     bearing = 0;
@@ -58,18 +57,20 @@ export class AboutUsComponent implements OnInit {
             console.log("Setting a marker...");
     
             var marker = new Marker();
-            marker.position = Position.positionFromLatLng(-33.86, 151.20);
-            marker.title = "Sydney";
-            marker.snippet = "Australia";
+            marker.position = Position.positionFromLatLng(this.hospital.latitude, this.hospital.longitude);
+            marker.title = this.hospital.name;
+            marker.snippet = this.hospital.address;
             marker.userData = {index: 1};
             this.mapView.addMarker(marker);
+            this.mapView
         }
     
         onCoordinateTapped(args) {
             console.log("Coordinate Tapped, Lat: " + args.position.latitude + ", Lon: " + args.position.longitude, args);
+            utils.openUrl("https://www.google.com/maps/search/?api=1&query="+this.hospital.latitude+","+this.hospital.longitude);
         }
     
-        onMarkerEvent(args) {
+    /* onMarkerEvent(args) {
             console.log("Marker Event: '" + args.eventName
                 + "' triggered on: " + args.marker.title
                 + ", Lat: " + args.marker.position.latitude + ", Lon: " + args.marker.position.longitude, args);
@@ -82,5 +83,5 @@ export class AboutUsComponent implements OnInit {
     
         onCameraMove(args) {
             console.log("Camera moving: " + JSON.stringify(args.camera));
-        }
+        } */
 }

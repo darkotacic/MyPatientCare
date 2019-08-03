@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using WebRegisterAPI.Models;
-using WebRegisterAPI.Repositories.IRepositories;
 using WebRegisterAPI.Services.IServices;
 
 namespace WebRegisterAPI.Controllers

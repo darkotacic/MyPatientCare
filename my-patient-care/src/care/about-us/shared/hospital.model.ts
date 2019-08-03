@@ -6,4 +6,5 @@ export class Hospital {
     public directorName: string;
     public latitude: number;
     public longitude: number;
+    public description: string;
 }

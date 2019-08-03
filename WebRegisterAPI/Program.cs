@@ -26,13 +26,13 @@ namespace WebRegisterAPI
 
             var url = config["ApplicationSettings:Server_URL"].ToString();
 
-            CreateWebHostBuilder(args, url).Build().Run();
+            CreateWebHostBuilder(args/*, url*/).Build().Run();
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args, string url) =>
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args/*, string url*/) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseKestrel()
-                .UseUrls(url)
+                //  .UseUrls(url)
                 .UseStartup<Startup>();
     }
 }
