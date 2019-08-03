@@ -15,7 +15,7 @@
           <Label fontSize="20" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." textWrap="true" padding="3"></Label>
        </StackLayout>
       <StackLayout row="2" col="0" >
-        <GridLayout columns="*,* " rows="*,*" verticalAlignment="top">
+        <GridLayout columns="*,*" rows="*,*" verticalAlignment="top">
           <StackLayout class="border" row="0" col="0" orientation="horizontal">
               <Label class="label" text="Director:" textWrap="true" verticalAlignment="center"></Label>
             <Label class="label" [text]="hospital.directorName" textWrap="true"  verticalAlignment="center" horizontalAlignment="center"  margin="20"></Label>
@@ -24,7 +24,17 @@
             <Label class="label" text="Address:" textWrap="true" verticalAlignment="center"></Label>
             <Label class="label" [text]="hospital.address" textWrap="true" verticalAlignment="center"></Label>
           </StackLayout>     
-          <Label class="label" text="Google slika" textWrap="true" row="0" col="1" rowspan="2"   margin="50"></Label>
+          <StackLayout row="0" col="1" rowspan="2">
+            <MapView #mapView [latitude]="latitude" [longitude]="longitude"
+                     [zoom]="zoom" [minZoom]="minZoom" [maxZoom]="maxZoom" [bearing]="bearing"
+                     [tilt]="tilt" (mapReady)="onMapReady($event)"
+                     (markerSelect)="onMarkerEvent($event)" (markerBeginDragging)="onMarkerEvent($event)"
+                     (markerEndDragging)="onMarkerEvent($event)" (markerDrag)="onMarkerEvent($event)"
+                     (markerInfoWindowTapped)="onMarkerEvent($event)" (coordinateTapped)="onCoordinateTapped($event)"
+                     (cameraChanged)="onCameraChanged($event)"
+                     (cameraMove)="onCameraMove($event)">
+              </MapView>
+           </StackLayout>
          </GridLayout>
       </StackLayout>
     </GridLayout>
