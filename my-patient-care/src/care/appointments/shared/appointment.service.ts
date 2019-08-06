@@ -17,4 +17,8 @@ export class AppointmentService {
     getAppointments() {
         return  this.http.get(this.BaseURI+'/Appointment/Appointments');
     }
+
+    getAppointment(id : number) {
+        return  this.http.get(this.BaseURI+'/Appointment/'+id);
+    }
 }

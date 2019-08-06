@@ -13,7 +13,7 @@ export class AppComponent {
     ngOnInit() {
         const firebase = require("nativescript-plugin-firebase");
         if(!this.appSettings.hasKey("BaseURI")){
-            this.appSettings.setString("BaseURI", "http://10.0.2.2:5000/api");
+            this.appSettings.setString("BaseURI", "http://192.168.1.5:5000/api");
         }
         firebase.init({
             showNotifications: true,
