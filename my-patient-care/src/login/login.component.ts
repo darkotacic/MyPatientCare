@@ -15,14 +15,14 @@ import { UserService } from "./shared/user.service";
     templateUrl: "./login.component.html"
 })
 export class LoginComponent implements OnInit {
-    @ViewChild("loginFormElement",{static: true}) loginFormElement: RadDataFormComponent;
+    @ViewChild("loginFormElement", {static: true}) loginFormElement: RadDataFormComponent;
     isLoading: boolean;
     readonly appSettings = require("tns-core-modules/application-settings");
 
     formModel = {
-        UserName: '',
-        Password: ''
-      }
+        UserName: "",
+        Password: ""
+      };
 
     private _loginForm: LoginForm;
 
@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
         this.formModel.Password = this._loginForm.password;
 
         this.service.login(this.formModel).subscribe(
-            (res:any) => {
+            (res: any) => {
                 this.isLoading = false;
                 this.appSettings.setString("token", res.token);
                 this._routerExtensions.navigate(["/care"],
@@ -76,7 +76,7 @@ export class LoginComponent implements OnInit {
                         }
                     });
             },
-            err => {
+            (err) => {
                 this.isLoading = false;
                 alert({
                     title: "Login failed",
@@ -85,7 +85,6 @@ export class LoginComponent implements OnInit {
                 });
             }
           );
-
 
 /*         UserService.login(this._loginForm.email, this._loginForm.password)
             .then((user: Kinvey.User) => {

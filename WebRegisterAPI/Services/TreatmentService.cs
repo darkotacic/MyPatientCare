@@ -64,7 +64,9 @@ namespace WebRegisterAPI.Services
                         Id = doctor.Id,
                         Email = doctor.Email,
                         UserName = doctor.UserName,
-                        FullName = doctor.FullName
+                        FullName = doctor.FullName,
+                        DoctorType = doctor.Type.Name
+                        
                     }
                );
             });

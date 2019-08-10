@@ -1,13 +1,12 @@
-import { HospitalService } from './shared/hospital.service';
+import { HospitalService } from "./shared/hospital.service";
 import { OnInit, Component } from "@angular/core";
-import { Hospital } from './shared/hospital.model';
-import { registerElement } from 'nativescript-angular/element-registry';
-import { MapView, Marker, Position } from 'nativescript-google-maps-sdk';
+import { Hospital } from "./shared/hospital.model";
+import { registerElement } from "nativescript-angular/element-registry";
+import { MapView, Marker, Position } from "nativescript-google-maps-sdk";
 import * as utils from "tns-core-modules/utils/utils";
 
-
 // Important - must register MapView plugin in order to use in Angular templates
-registerElement('MapView', () => MapView);
+registerElement("MapView", () => MapView);
 
 @Component({
     selector: "AboutUs",
@@ -29,45 +28,46 @@ export class AboutUsComponent implements OnInit {
     padding = [40, 40, 40, 40];
     mapView: MapView;
 
-    lastCamera: String;
+    lastCamera: string;
 
-    constructor(private hospitalService : HospitalService) {
+    constructor(private hospitalService: HospitalService) {
         
     }
 
     ngOnInit(): void {
         this.isLoaded = false;
         this.hospitalService.getHospitalInfo().subscribe(
-            (result:Hospital) => {
+            (result: Hospital) => {
                 this.hospital = result;
                 this.isLoaded = true;
             },
-            error => {
-
+            (error) => {
+                console.log(error);
             }
         );
     }
 
-        //Map events
-        onMapReady(event) {
-            console.log('Map Ready');
+        // Map events
+    onMapReady(event) {
+            console.log("Map Ready");
     
             this.mapView = event.object;
     
             console.log("Setting a marker...");
     
-            var marker = new Marker();
+            const marker = new Marker();
             marker.position = Position.positionFromLatLng(this.hospital.latitude, this.hospital.longitude);
             marker.title = this.hospital.name;
             marker.snippet = this.hospital.address;
             marker.userData = {index: 1};
             this.mapView.addMarker(marker);
-            this.mapView
         }
     
-        onCoordinateTapped(args) {
-            console.log("Coordinate Tapped, Lat: " + args.position.latitude + ", Lon: " + args.position.longitude, args);
-            utils.openUrl("https://www.google.com/maps/search/?api=1&query="+this.hospital.latitude+","+this.hospital.longitude);
+    onCoordinateTapped(args) {
+            console.log("Coordinate Tapped, Lat: " + args.position.latitude +
+            ",Lon: " + args.position.longitude, args);
+            utils.openUrl("https://www.google.com/maps/search/?api=1&query=" +
+            this.hospital.latitude + "," + this.hospital.longitude);
         }
     
     /* onMarkerEvent(args) {
@@ -77,7 +77,8 @@ export class AboutUsComponent implements OnInit {
         }
     
         onCameraChanged(args) {
-            console.log("Camera changed: " + JSON.stringify(args.camera), JSON.stringify(args.camera) === this.lastCamera);
+            console.log("Camera changed: " +
+            JSON.stringify(args.camera), JSON.stringify(args.camera) === this.lastCamera);
             this.lastCamera = JSON.stringify(args.camera);
         }
     

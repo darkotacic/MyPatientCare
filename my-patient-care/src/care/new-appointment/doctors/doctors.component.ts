@@ -1,8 +1,8 @@
-import { UserService } from '../../../login/shared/user.service';
+import { UserService } from "../../../login/shared/user.service";
 import { Component, OnInit } from "@angular/core";
 import { RouterExtensions, PageRoute } from "nativescript-angular/router";
 import { ActivatedRoute } from "@angular/router";
-import { Doctor } from '../shared/doctor.model';
+import { Doctor } from "../shared/doctor.model";
 
 /* ***********************************************************
 * Before you can navigate to this page from your app, you need to reference this page's module in the
@@ -31,24 +31,24 @@ export class DoctorsComponent implements OnInit {
 
     ngOnInit(): void {
         this.doctors = new Array<Doctor>();
-        this._route.params.subscribe(params => {
+        this._route.params.subscribe((params) => {
             this.title = "Doctors";
-            var treatmentId = params["treatmentId"];
+            const treatmentId = params.treatmentId;
             this.userService.getTreatmentDoctors(treatmentId).subscribe(
-                (result:any) => {
+                (result: any) => {
                     this.doctors = result;
-                }, 
-                error => {
-
+                },
+                (error) => {
+                    console.log(error);
                 });
-        })
+        });
     }
 
     onBackButtonTap(): void {
         this._routerExtensions.backToPreviousPage();
     }
 
-    onDoctorTap(doctor : Doctor){
+    onDoctorTap(doctor: Doctor) {
         this._routerExtensions.navigate([
             "care/calendar",
             doctor.id],

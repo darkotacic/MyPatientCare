@@ -54,7 +54,8 @@ namespace WebRegisterAPI.Repositories
 
         public IEnumerable<ApplicationUser> GetDoctorsForTreatment(int typeId)
         {
-            return _context.ApplicationUsers.Where(user => user != null && user.TypeId == typeId);
+            return _context.ApplicationUsers.Where(user => user != null && user.TypeId == typeId)
+                                            .Include(user => user.Type);
         }
     }
 }
