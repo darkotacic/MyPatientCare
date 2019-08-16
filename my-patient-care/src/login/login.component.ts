@@ -6,7 +6,7 @@ import { isIOS } from "tns-core-modules/platform";
 import { alert } from "tns-core-modules/ui/dialogs";
 import { Page } from "tns-core-modules/ui/page";
 
-import { LoginForm } from "./login-form.model";
+import { LoginForm } from "./shared/login-form.model";
 import { UserService } from "./shared/user.service";
 
 @Component({

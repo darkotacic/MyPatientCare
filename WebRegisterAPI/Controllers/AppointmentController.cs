@@ -2,12 +2,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using WebRegisterAPI.Models;
 using WebRegisterAPI.Models.User;
-using WebRegisterAPI.Repositories.IRepositories;
 using WebRegisterAPI.Services.IServices;
 using WebRegisterAPI.ViewModels;
 

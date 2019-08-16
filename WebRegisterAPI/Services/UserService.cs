@@ -39,9 +39,9 @@ namespace WebRegisterAPI.Services
             return null;
         }
 
-        public List<DoctorViewModel> GetAllDoctors()
+        public List<DoctorViewModel> GetAllDoctors(int? hospitalId)
         {
-            List<ApplicationUser> doctors = userRepository.GetAllDoctors().ToList();
+            List<ApplicationUser> doctors = userRepository.GetAllDoctors(hospitalId).ToList();
             return Map(doctors);
         }
         private List<DoctorViewModel> Map(List<ApplicationUser> doctors)

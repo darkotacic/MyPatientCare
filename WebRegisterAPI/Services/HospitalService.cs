@@ -1,5 +1,4 @@
 ﻿using WebRegisterAPI.Models;
-using WebRegisterAPI.Repositories;
 using WebRegisterAPI.Repositories.IRepositories;
 using WebRegisterAPI.Services.IServices;
 
@@ -13,7 +12,7 @@ namespace WebRegisterAPI.Services
         {
             this.hospitalRepository = hospitalRepository;
         }
-        public Hospital GetHospital(int hospitalId)
+        public Hospital GetHospital(int? hospitalId)
         {
             return hospitalRepository.GetHospital(hospitalId);
         }

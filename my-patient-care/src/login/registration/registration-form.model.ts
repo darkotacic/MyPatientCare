@@ -4,7 +4,7 @@ export class RegistrationForm {
     passwordConfirm: string;
     givenName: string;
     familyName: string;
-    gender: string;
+    phoneNumber: string;
     dateOfBirth: string;
 
     constructor() {
@@ -13,7 +13,7 @@ export class RegistrationForm {
         this.passwordConfirm = "";
         this.givenName = "";
         this.familyName = "";
-        this.gender = "male";
+        this.phoneNumber = "";
         this.dateOfBirth = null;
     }
 }

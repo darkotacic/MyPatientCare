@@ -5,7 +5,7 @@ namespace WebRegisterAPI.Repositories.IRepositories
 {
     public interface IUserRepository
     {
-        IEnumerable<ApplicationUser> GetAllDoctors();
+        IEnumerable<ApplicationUser> GetAllDoctors(int? hospitalId);
 
         ApplicationUser GetUserById(string userId);
     }

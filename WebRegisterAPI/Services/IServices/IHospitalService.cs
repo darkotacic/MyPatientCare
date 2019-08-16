@@ -4,6 +4,6 @@ namespace WebRegisterAPI.Services.IServices
 {
     public interface IHospitalService
     {
-        Hospital GetHospital(int hospitalId);
+        Hospital GetHospital(int? hospitalId);
     }
 }

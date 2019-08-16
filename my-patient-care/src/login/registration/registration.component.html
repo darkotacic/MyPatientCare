@@ -27,7 +27,7 @@
                             <TKNonEmptyValidator tkEntityPropertyValidators errorMessage="Password is required."></TKNonEmptyValidator>
                         </TKEntityProperty>
 
-                        <TKEntityProperty tkPropertyGroupProperties name="passwordConfirm" displayName="Confirm" hintText="Enter password again"
+                        <TKEntityProperty tkPropertyGroupProperties name="passwordConfirm" displayName="Confirm Password" hintText="Enter password again"
                             required="true" index="2">
                             <TKPropertyEditor tkEntityPropertyEditor type="Password">
                                 <TKPropertyEditorStyle tkPropertyEditorStyle labelFontStyle="Bold"></TKPropertyEditorStyle>
@@ -53,9 +53,8 @@
                             <TKNonEmptyValidator tkEntityPropertyValidators errorMessage="Last name is required."></TKNonEmptyValidator>
                         </TKEntityProperty>
 
-                        <TKEntityProperty tkPropertyGroupProperties name="gender" displayName="Gender" hintText="Pick a gender" required="true" index="5"
-                            valuesProvider="male, female">
-                            <TKPropertyEditor tkEntityPropertyEditor type="Picker">
+                        <TKEntityProperty tkPropertyGroupProperties name="phoneNumber" displayName="Phone number" hintText="0652551118" required="false" index="5">
+                            <TKPropertyEditor tkEntityPropertyEditor type="Text">
                                 <TKPropertyEditorStyle tkPropertyEditorStyle labelFontStyle="Bold"></TKPropertyEditorStyle>
                             </TKPropertyEditor>
                         </TKEntityProperty>

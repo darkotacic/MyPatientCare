@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WebRegisterAPI.Database;
+﻿using WebRegisterAPI.Database;
 using WebRegisterAPI.Models;
 using WebRegisterAPI.Repositories.IRepositories;
 
@@ -14,7 +10,7 @@ namespace WebRegisterAPI.Repositories
         {
         }
 
-        public Hospital GetHospital(int id)
+        public Hospital GetHospital(int? id)
         {
             return _context.Hospitals.Find(id);
         }

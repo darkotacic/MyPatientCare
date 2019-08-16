@@ -10,7 +10,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using WebRegisterAPI.Models;
+using WebRegisterAPI.Models.Config;
 using WebRegisterAPI.Models.User;
 using WebRegisterAPI.Services.IServices;
 using WebRegisterAPI.ViewModels;
@@ -25,11 +25,15 @@ namespace WebRegisterAPI.Controllers
         private SignInManager<ApplicationUser> _singInManager;
         private readonly ITreatmentService treatmentService;
         private readonly IUserService userService;
+        private readonly HospitalSettings _hospitalSettings;
         private readonly ApplicationSettings _appSettings;
+    
+
 
         public ApplicationUserController(UserManager<ApplicationUser> userManager,
                                         SignInManager<ApplicationUser> signInManager,
                                         IOptions<ApplicationSettings> appSettings,
+                                        IOptions<HospitalSettings> hospitalSettings,
                                         ITreatmentService treatmentService,
                                         IUserService userService)
         {
@@ -38,20 +42,23 @@ namespace WebRegisterAPI.Controllers
             this.userService = userService;
             _userManager = userManager;
             _appSettings = appSettings.Value;
+            _hospitalSettings = hospitalSettings.Value;
         }
 
         [HttpPost]
         [Route("Register")]
         //POST : api/ApplicationUser/Register
-        public async Task<Object> PostApplicationUser(ApplicationUserViewModel model)
+        public async Task<IActionResult> PostApplicationUser(RegistrationViewModel model)
         {
 
             var applicationUser = new ApplicationUser()
             {
-                UserName = model.UserName,
+                UserName = model.Email,
                 Email = model.Email,
-                FullName = model.FullName
-            };
+                FullName = model.GivenName + " " + model.FamilyName,
+                PhoneNumber = model.PhoneNumber,
+                HospitalId = _hospitalSettings.MyHospital
+        };
             try
             {
                 var result = await _userManager.CreateAsync(applicationUser, model.Password);
@@ -128,12 +135,18 @@ namespace WebRegisterAPI.Controllers
         [HttpGet]
         [Authorize]
         [Route("Doctors")]
-        public IActionResult GetAllDoctors()
+        public async Task<IActionResult> GetAllDoctors()
         {
-            List<DoctorViewModel> doctors = userService.GetAllDoctors();
-            if (doctors != null && doctors.Count > 0)
+            var claimsIdentity = this.User.Identity as ClaimsIdentity;
+            var userId = claimsIdentity.FindFirst("UserID")?.Value;
+            if (userId != null)
             {
-                return Ok(doctors);
+                ApplicationUser user = await _userManager.FindByIdAsync(userId);
+                List<DoctorViewModel> doctors = userService.GetAllDoctors(user.HospitalId);
+                if (doctors != null && doctors.Count > 0)
+                {
+                    return Ok(doctors);
+                }
             }
             return NotFound(new { message = "No doctors" });
         }

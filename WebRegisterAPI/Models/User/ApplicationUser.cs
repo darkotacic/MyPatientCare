@@ -1,11 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace WebRegisterAPI.Models.User
 {
@@ -17,7 +13,7 @@ namespace WebRegisterAPI.Models.User
         public string License { get; set; }
         public Hospital Hospital { get; set; }
         [ForeignKey("Hospital")]
-        public int HospitalId { get; set; }
+        public int? HospitalId { get; set; }
         public DoctorType Type { get; set; }
         [ForeignKey("Type")]
         public int? TypeId { get; set; }

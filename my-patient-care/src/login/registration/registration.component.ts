@@ -15,7 +15,7 @@ import { RegistrationForm } from "./registration-form.model";
     templateUrl: "./registration.component.html"
 })
 export class RegistrationComponent implements OnInit {
-    @ViewChild("registrationFormElement",{static: true}) registrationFormElement: RadDataFormComponent;
+    @ViewChild("registrationFormElement", {static: true}) registrationFormElement: RadDataFormComponent;
     isLoading: boolean;
 
     private _registrationForm: RegistrationForm;
@@ -82,9 +82,14 @@ export class RegistrationComponent implements OnInit {
 
         this.isLoading = true;
 
-        /*         this.service.signup(this._registrationForm)
-            .then((user: Kinvey.User) => {
-                this._routerExtensions.navigate(["/care"],
+        this.service.signup(this._registrationForm).subscribe(
+            (res: any) => {
+                this.isLoading = false;
+                alert({
+                    title: "Registration successful",
+                    okButtonText: "Ok"
+                });
+                this._routerExtensions.navigate(["/login"],
                     {
                         clearHistory: true,
                         animated: true,
@@ -94,17 +99,16 @@ export class RegistrationComponent implements OnInit {
                             curve: "ease"
                         }
                     });
-
-                this.isLoading = false;
-            })
-            .catch((error: Kinvey.BaseError) => {
+            },
+            (error) => {
                 this.isLoading = false;
                 alert({
                     title: "Registration failed",
                     message: error.message,
                     okButtonText: "Ok"
                 });
-            }); */
+            }
+          );
     }
 
     private hasPasswordConfirmValidationErrors(): boolean {

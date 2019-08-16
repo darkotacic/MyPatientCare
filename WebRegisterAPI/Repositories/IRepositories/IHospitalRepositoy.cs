@@ -4,6 +4,6 @@ namespace WebRegisterAPI.Repositories.IRepositories
 {
     public interface IHospitalRepositoy
     {
-        Hospital GetHospital(int hospitalId);
+        Hospital GetHospital(int? hospitalId);
     }
 }

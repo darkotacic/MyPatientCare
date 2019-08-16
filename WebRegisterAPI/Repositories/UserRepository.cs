@@ -12,9 +12,9 @@ namespace WebRegisterAPI.Repositories
         public UserRepository(AppDbContext context) : base(context)
         {
         }
-        public IEnumerable<ApplicationUser> GetAllDoctors()
+        public IEnumerable<ApplicationUser> GetAllDoctors(int? hospitalId)
         {
-            return _context.ApplicationUsers.Where(user => user.TypeId != null).Include(user => user.Type);
+            return _context.ApplicationUsers.Where(user => user.TypeId != null && user.HospitalId == hospitalId).Include(user => user.Type);
         }
 
         public ApplicationUser GetUserById(string userId)

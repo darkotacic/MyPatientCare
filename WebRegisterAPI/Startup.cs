@@ -13,6 +13,7 @@
     using System.Text;
     using WebRegisterAPI.Database;
     using WebRegisterAPI.Models;
+    using WebRegisterAPI.Models.Config;
     using WebRegisterAPI.Models.User;
     using WebRegisterAPI.Repositories;
     using WebRegisterAPI.Repositories.IRepositories;
@@ -47,6 +48,7 @@
         {
             //Inject app services
             services.Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
+            services.Configure<HospitalSettings>(Configuration);
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
