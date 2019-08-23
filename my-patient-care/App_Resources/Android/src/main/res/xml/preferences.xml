@@ -7,9 +7,9 @@
             android:summary="Turn reminder notification"
             android:defaultValue="false" />
         <EditTextPreference
+            android:key="reminder_preference"
             android:title="Appointment reminder"
             android:summary="Set notification reminder in minutes"
-            android:key="reminder"
             android:defaultValue="60"
             android:numeric="integer"/>
     </PreferenceCategory>

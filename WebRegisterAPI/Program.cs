@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using System;
 using System.IO;
 
 namespace WebRegisterAPI
@@ -9,7 +10,7 @@ namespace WebRegisterAPI
     {
         public static void Main(string[] args)
         {
-            //MyScheduler.IntervalInSeconds(00, 32, 15,
+            //MyScheduler.IntervalInSeconds(15, 0, 10,
             //() =>
             //{
             //    Console.WriteLine("//here write the code that you want to schedule");

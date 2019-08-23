@@ -14,7 +14,7 @@ export class AuthInterceptor implements HttpInterceptor {
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>{
-        if(this.appSettings.hasKey("token")){
+        if(this.appSettings.hasKey("token") && req.url != "https://fcm.googleapis.com/fcm/send"){
             const clonedRequest = req.clone({
                 headers: req.headers.set('Authorization','Bearer '+this.appSettings.getString("token")),
             });
@@ -25,9 +25,11 @@ export class AuthInterceptor implements HttpInterceptor {
                     },
                     err => {
                         if(err.status == 401) {
+                            this.appSettings.remove("token");
                             this.router.navigate(["login"], { clearHistory: true });
                         }
                         else if (err.status == 403){
+                            this.appSettings.remove("token");
                             this.router.navigate(["login"], { clearHistory: true });
                         }
                     }

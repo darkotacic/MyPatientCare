@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using WebRegisterAPI.Models.User;
 using WebRegisterAPI.ViewModels;
 
@@ -9,6 +10,8 @@ namespace WebRegisterAPI.Services.IServices
         IEnumerable<Appointment> GetAllAppointments();
         Appointment CreateAppointment(CreateAppointmentViewModel viewModel);
         List<AppointmentViewModel> GetAllUserAppointments(string userId);
+
+        List<long> GetAllUserAppointmentsForDate(string userId, DateTime date);
 
     }
 }

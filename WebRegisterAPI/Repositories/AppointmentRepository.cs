@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using WebRegisterAPI.Database;
@@ -44,12 +45,23 @@ namespace WebRegisterAPI.Repositories
             return _context.Appointments.Find(Id);
         }
 
+        public IEnumerable<Appointment> GetAppointmentsForDate(string userId, DateTime date)
+        {
+            ApplicationUser user = _context.ApplicationUsers.Find(userId);
+            if (user != null)
+            {
+                IEnumerable<Appointment> userAppointments = GetAllAppointments().Where(appointment => appointment != null && appointment.PatientId == userId && appointment.Date.Day == date.Day);
+                return userAppointments;
+            }
+            return null;
+        }
+
         public IEnumerable<Appointment> GetAppointmentsForUser(string userId)
         {
             ApplicationUser user = _context.ApplicationUsers.Find(userId);
             if (user != null)
             {
-                IEnumerable<Appointment> userAppointments = this.GetAllAppointments().Where(appointment => appointment != null && appointment.PatientId == userId);
+                IEnumerable<Appointment> userAppointments = GetAllAppointments().Where(appointment => appointment != null && appointment.PatientId == userId);
                 return userAppointments;
             }
             return null;
@@ -58,7 +70,7 @@ namespace WebRegisterAPI.Repositories
         public Appointment Update(Appointment appointmentChange)
         {
             var appointment = _context.Appointments.Attach(appointmentChange);
-            appointment.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            appointment.State = EntityState.Modified;
             _context.SaveChanges();
             return appointmentChange;
         }

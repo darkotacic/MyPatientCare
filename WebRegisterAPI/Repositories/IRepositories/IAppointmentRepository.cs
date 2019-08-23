@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using WebRegisterAPI.Models.User;
 using WebRegisterAPI.ViewModels;
 
@@ -13,5 +14,7 @@ namespace WebRegisterAPI.Repositories.IRepositories
         Appointment Delete(int id);
 
         IEnumerable<Appointment> GetAppointmentsForUser(string userId);
+
+        IEnumerable<Appointment> GetAppointmentsForDate(string userId, DateTime date);
     }
 }

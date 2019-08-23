@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -28,11 +29,25 @@ namespace WebRegisterAPI.Controllers
         [Route("Appointments")]
         public IActionResult GetAppointments()
         {
-            var claimsIdentity = this.User.Identity as ClaimsIdentity;
+            var claimsIdentity = User.Identity as ClaimsIdentity;
             var userId = claimsIdentity.FindFirst("UserID")?.Value;
             if (userId != null)
             {
                 List<AppointmentViewModel> appointments = appointmentService.GetAllUserAppointments(userId);
+                return Ok(appointments);
+            }
+            return NotFound(new { message = "No logged in user" });
+        }
+
+        [HttpGet]
+        [Route("AppointmentsToday")]
+        public IActionResult GetAppointmentsForDate()
+        {
+            var claimsIdentity = User.Identity as ClaimsIdentity;
+            var userId = claimsIdentity.FindFirst("UserID")?.Value;
+            if (userId != null)
+            {
+                List<long> appointments = appointmentService.GetAllUserAppointmentsForDate(userId, DateTime.Today);
                 return Ok(appointments);
             }
             return NotFound(new { message = "No logged in user" });

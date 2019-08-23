@@ -18,6 +18,10 @@ export class AppointmentService {
         return  this.http.get(this.BaseURI+'/Appointment/Appointments');
     }
 
+    getAppointmentsForToday() {
+        return  this.http.get(this.BaseURI+'/Appointment/AppointmentsToday');
+    }
+
     getAppointment(id : number) {
         return  this.http.get(this.BaseURI+'/Appointment/'+id);
     }

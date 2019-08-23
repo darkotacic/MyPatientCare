@@ -1,3 +1,5 @@
+import { Notification, NotificationMessage } from './shared/notification-message';
+import { AppointmentService } from './../care/appointments/shared/appointment.service';
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { RouterExtensions } from "nativescript-angular/router";
 import { DataFormEventData } from "nativescript-ui-dataform";
@@ -5,9 +7,12 @@ import { RadDataFormComponent } from "nativescript-ui-dataform/angular";
 import { isIOS } from "tns-core-modules/platform";
 import { alert } from "tns-core-modules/ui/dialogs";
 import { Page } from "tns-core-modules/ui/page";
+import { setInterval, setTimeout } from "tns-core-modules/timer";
 
 import { LoginForm } from "./shared/login-form.model";
 import { UserService } from "./shared/user.service";
+import { Preferences } from "nativescript-preferences";
+import { NotificationService } from './shared/notification.service';
 
 @Component({
     selector: "Login",
@@ -25,22 +30,28 @@ export class LoginComponent implements OnInit {
       };
 
     private _loginForm: LoginForm;
+    prefs: Preferences; 
+    private readonly MS_IN_MIN : number = 60000;
+    private readonly MS_IN_DAY : number = 86400000;
 
     constructor(
         private _page: Page,
         private _routerExtensions: RouterExtensions,
-        private service: UserService
+        private userService: UserService,
+        private appointmentService: AppointmentService,
+        private notificationService: NotificationService
     ) { }
 
     ngOnInit(): void {
         this.isLoading = false;
-
+        this.prefs = new Preferences();
         this._page.actionBarHidden = true;
         this._loginForm = new LoginForm();
     }
 
+
     get loginForm(): LoginForm {
-        return this._loginForm;
+        return this._loginForm;  
     }
 
     onEditorUpdate(args: DataFormEventData) {
@@ -61,10 +72,11 @@ export class LoginComponent implements OnInit {
         this.formModel.UserName = this._loginForm.email;
         this.formModel.Password = this._loginForm.password;
 
-        this.service.login(this.formModel).subscribe(
+        this.userService.login(this.formModel).subscribe(
             (res: any) => {
                 this.isLoading = false;
                 this.appSettings.setString("token", res.token);
+                this.checkNotifications();
                 this._routerExtensions.navigate(["/care"],
                     {
                         clearHistory: true,
@@ -109,6 +121,54 @@ export class LoginComponent implements OnInit {
                     okButtonText: "Ok"
                 });
             }); */
+    }
+
+    checkNotifications() : void {
+/*         var date = new Date();
+        var nextDay = new Date();
+       // nextDay.setDate(date.getDate() + 1);
+        nextDay.setHours(13);
+        nextDay.setMinutes(30);
+        nextDay.setSeconds(0);
+        nextDay.setMilliseconds(0);
+        var timeDifference = nextDay.getTime()- date.getTime();
+        setTimeout(() => { */
+            this.checkBackend();
+             setInterval(() => {
+                this.checkBackend();
+            //}, this.MS_IN_DAY);   
+        }, 5000);  
+        //}, timeDifference);
+    }
+
+    checkBackend() : void {
+         //console.log(this.prefs.getValue("reminder_preference", "60"));
+         var notificationsBool = this.prefs.getValue("enabled_preference", false);
+         var fcmtoken : string = this.appSettings.getString("fcmtoken");
+         var notificationService = this.notificationService;
+         if(notificationsBool){
+            this.appointmentService.getAppointmentsForToday().subscribe(
+                (res: any) => {
+                    console.log(res);
+                    if(res.length > 0){
+                        var reminderMin =Number(this.prefs.getValue("reminder_preference", "60"));
+                        var reminder = reminderMin*this.MS_IN_MIN;
+                        res.forEach(function (value) {
+                            var timeLeft = value-reminder-Date.now();
+                            console.log(timeLeft);
+                            setTimeout(() => { 
+                                var notificationMessage = new NotificationMessage(fcmtoken,reminderMin);
+                                console.log(notificationMessage);
+                                notificationService.sendNotification(notificationMessage);
+                            }, timeLeft, fcmtoken , notificationService,reminderMin);
+                        }); 
+                    }
+                },
+                (err) => {
+
+                }
+              );
+         }
     }
 
     onRegisterButtonTap(): void {

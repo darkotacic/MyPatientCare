@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using WebRegisterAPI.Models;
 using WebRegisterAPI.Models.User;
@@ -51,6 +52,12 @@ namespace WebRegisterAPI.Services
             return Map(appointments);
         }
 
+        public List<long> GetAllUserAppointmentsForDate(string userId, DateTime date)
+        {
+            List<Appointment> appointments = appointmentRepository.GetAppointmentsForDate(userId, date).ToList();
+            return MillisecondMap(appointments);
+        }
+
         private List<AppointmentViewModel> Map(List<Appointment> appointments)
         {
             List<AppointmentViewModel> viewModel = new List<AppointmentViewModel>();
@@ -71,6 +78,18 @@ namespace WebRegisterAPI.Services
                );
             });
             return viewModel;
+        }
+
+        private List<long> MillisecondMap(List<Appointment> appointments)
+        {
+            List<long> list = new List<long>();
+            appointments.ForEach(appointment =>
+            {
+                list.Add(
+                    new DateTimeOffset(appointment.Date).ToUnixTimeMilliseconds()
+               );
+            });
+            return list;
         }
     }
 }

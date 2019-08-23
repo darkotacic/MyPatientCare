@@ -1,3 +1,4 @@
+import { NotificationService } from './login/shared/notification.service';
 import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptModule } from "nativescript-angular/nativescript.module";
 import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
@@ -23,6 +24,7 @@ import { CareModule } from "./care/care.module";
     ],
     providers: [
         UserService,
+        NotificationService,
         LoggedInLazyLoadGuard,{
         provide: HTTP_INTERCEPTORS,
         useClass: AuthInterceptor,
