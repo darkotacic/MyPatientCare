@@ -53,6 +53,27 @@ namespace WebRegisterAPI.Controllers
             return NotFound(new { message = "No logged in user" });
         }
 
+        [HttpGet]
+        [Route("AppointmentsCalendar")]
+        public IActionResult GetAppointmentsForCalendar(string doctorId, int treatmentId, DateTime date)
+        {
+            var claimsIdentity = User.Identity as ClaimsIdentity;
+            var userId = claimsIdentity.FindFirst("UserID")?.Value;
+            if (userId != null)
+            {
+                List<string> dates = appointmentService.GetAllAvailableDates(doctorId, date, treatmentId);
+                if (dates == null)
+                {
+                    return NotFound(new { message = "Selected doctory is on holiday or bad treatmentId." });
+                }
+                else
+                {
+                    return Ok(dates);
+                }
+            }
+            return NotFound(new { message = "No logged in user" });
+        }
+
         [HttpPost]
         [Route("Create")]
         public async Task<IActionResult> CreateAppointment(CreateAppointmentViewModel viewModel)

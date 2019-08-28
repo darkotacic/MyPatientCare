@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Appointment } from "./appointment-model";
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpParams } from '@angular/common/http';
 
 @Injectable({
     providedIn: "root"
@@ -20,6 +19,14 @@ export class AppointmentService {
 
     getAppointmentsForToday() {
         return  this.http.get(this.BaseURI+'/Appointment/AppointmentsToday');
+    }
+
+    getAppointmentsForCalendar(doctorId: string, treatmentId : number, selectedDate : string) {
+        let params = new HttpParams();
+        params = params.append('doctorId', doctorId);
+        params = params.append('treatmentId', treatmentId.toString());
+        params = params.append('date', selectedDate);
+        return  this.http.get(this.BaseURI+'/Appointment/AppointmentsCalendar', { params : params });
     }
 
     getAppointment(id : number) {

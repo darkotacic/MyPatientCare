@@ -2,14 +2,32 @@
     xmlns:navigation="navigation/example-page"
     xmlns:calendar="nativescript-ui-calendar"
     xmlns="http://www.nativescript.org/tns.xsd">
-    <navigation.actionBar>
-        <ActionBar class="action-bar" >
-            <NavigationButton android.systemIcon="ic_menu_back" (tap)="onBackButtonTap()">
-            </NavigationButton>
-            <Label class="action-bar-title" [text]="title"></Label>
-        </ActionBar>
-    </navigation.actionBar>
-    <calendar:RadCalendar id="calendar" 
-    [monthViewStyle]="_monthViewStyle" [weekViewStyle]="_weekViewStyle" [monthNamesViewStyle]="_monthNamesViewStyle"
-                [yearViewStyle]="_yearViewStyle" [dayViewStyle]="_dayViewStyle"/>
-</navigation:ExamplePage>
+    <GridLayout>
+        <navigation.actionBar>
+            <ActionBar class="action-bar" >
+                <NavigationButton android.systemIcon="ic_menu_back" (tap)="onBackButtonTap()">
+                </NavigationButton>
+                <Label class="action-bar-title" [text]="title"></Label>
+            </ActionBar>
+        </navigation.actionBar>
+        <GridLayout rows="3*,*" columns="*">
+            <calendar:RadCalendar row="0" id="calendar" 
+                (dateSelected)="onDateSelected($event)"
+               (viewModeChanged)="onViewModeChanged($event)"
+                [monthViewStyle]="_monthViewStyle" [weekViewStyle]="_weekViewStyle" [monthNamesViewStyle]="_monthNamesViewStyle"
+                            [yearViewStyle]="_yearViewStyle" [dayViewStyle]="_dayViewStyle"/> 
+            <StackLayout row="1" class="available-dates">
+                <Label *ngIf="!selectedDate" class="label" >
+                    <FormattedString>
+                        <Span text="Select a date from the calendar" fontAttributes="bold"></Span>
+                    </FormattedString>
+                </Label>
+                <Label *ngIf="selectedDate && freeAppointments.length == 0" textWrap="true" class="label" 
+                    text="No available appointment slots. Please select another date">
+                </Label>
+                <Button *ngIf="selectedDate && freeAppointments.length > 0" text="Choose time" (tap)="showPicker()" class="button" ></Button>
+            </StackLayout>     
+        </GridLayout>
+        <FilterableListpicker #myfilter  [blur]="dark" hintText="Type to filter..." [source]="freeAppointments"  (itemTapped)="itemTapped($event)"></FilterableListpicker>
+    </GridLayout>
+</navigation:ExamplePage> 

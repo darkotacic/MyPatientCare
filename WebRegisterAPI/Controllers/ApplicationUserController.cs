@@ -27,7 +27,7 @@ namespace WebRegisterAPI.Controllers
         private readonly IUserService userService;
         private readonly HospitalSettings _hospitalSettings;
         private readonly ApplicationSettings _appSettings;
-    
+
 
 
         public ApplicationUserController(UserManager<ApplicationUser> userManager,
@@ -58,7 +58,7 @@ namespace WebRegisterAPI.Controllers
                 FullName = model.GivenName + " " + model.FamilyName,
                 PhoneNumber = model.PhoneNumber,
                 HospitalId = _hospitalSettings.MyHospital
-        };
+            };
             try
             {
                 var result = await _userManager.CreateAsync(applicationUser, model.Password);
@@ -96,7 +96,7 @@ namespace WebRegisterAPI.Controllers
                 var tokenDescriptor = new SecurityTokenDescriptor()
                 {
                     Subject = new ClaimsIdentity(claimList),
-                    Expires = DateTime.UtcNow.AddDays(1),
+                    Expires = DateTime.UtcNow.AddDays(7),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature),
                 };
                 var tokenHandler = new JwtSecurityTokenHandler();

@@ -68,6 +68,8 @@
             services.AddScoped<IContactInfoService, ContactInfoService>();
             services.AddScoped<IHospitalService, HospitalService>();
             services.AddScoped<IHospitalRepositoy, HospitalRepository>();
+            services.AddScoped<IHolidayRepository, HolidayRepository>();
+            services.AddScoped<IScheduleRepository, ScheduleRepository>();
 
             services.Configure<IdentityOptions>(options =>
             {

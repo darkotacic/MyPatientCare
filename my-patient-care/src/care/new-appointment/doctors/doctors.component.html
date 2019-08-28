@@ -6,7 +6,7 @@
 <StackLayout>
     <Label text="Doctors" class="care-common-list-header text-uppercase t-14 p-l-15 p-t-30 p-b-7"></Label>
     <StackLayout class="hr-light"></StackLayout>
-    <ScrollView>
+    <ScrollView height="100%">
         <StackLayout>
             <StackLayout *ngFor="let doctor of doctors; let index = index;" orientation="horizontal" (tap)="onDoctorTap(doctor)">
                 <GridLayout rows="auto, auto" columns="*, auto" class="p-t-10 p-l-15">

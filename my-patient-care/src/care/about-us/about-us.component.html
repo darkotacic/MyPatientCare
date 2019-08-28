@@ -1,4 +1,4 @@
-<Page xmlns="http://schemas.nativescript.org/tns.xsd">
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:accordion="nativescript-accordion">
   <GridLayout rows="*,*,2*" columns="*" *ngIf="isLoaded">
     <StackLayout row="0" column = "0">
           <GridLayout columns="*,2* " rows="*" verticalAlignment="top">
@@ -10,7 +10,7 @@
             </StackLayout>     
            </GridLayout>
      </StackLayout>
-    <ScrollView row="1" column = "0">
+    <ScrollView row="1" column = "0" height="100%">
         <StackLayout>
             <Label fontSize="20" [text]="hospital.description" textWrap="true" padding="3"></Label>
        </StackLayout>
@@ -26,18 +26,30 @@
               <Label class="label" [text]="hospital.address" textWrap="true" verticalAlignment="center"></Label>
             </StackLayout>     
             <StackLayout row="0" col="1" rowspan="2">
-              <MapView #mapView [latitude]="hospital.latitude" [longitude]="hospital.longitude"
-                      [zoom]="zoom" [minZoom]="minZoom" [maxZoom]="maxZoom" [bearing]="bearing"
-                      [tilt]="tilt" (mapReady)="onMapReady($event)"
-                      (coordinateTapped)="onCoordinateTapped($event)">
-                </MapView>
-<!--            (cameraChanged)="onCameraChanged($event)"
-                (cameraMove)="onCameraMove($event)"
-                (markerSelect)="onMarkerEvent($event)" 
-                (markerBeginDragging)="onMarkerEvent($event)"
-                (markerEndDragging)="onMarkerEvent($event)" 
-                (markerDrag)="onMarkerEvent($event)"
-                (markerInfoWindowTapped)="onMarkerEvent($event)" -->
+                  <accordion:Accordion  [items]="items" allowMultiple="false" [selectedIndexes]="selectedIndexes">
+                      <ng-template let-i="index" let-item="item" acTemplateKey="title">
+                        <GridLayout backgroundColor="lightblue">
+                          <Label class="label" height="100%" [text]="item.title"></Label>
+                        </GridLayout>
+                      </ng-template>
+                  
+                      <ng-template let-i="index" let-item="item" acTemplateKey="content">
+                        <StackLayout>
+                            <MapView height="250" #mapView [latitude]="hospital.latitude" [longitude]="hospital.longitude"
+                            [zoom]="zoom" [minZoom]="minZoom" [maxZoom]="maxZoom" [bearing]="bearing"
+                            [tilt]="tilt" (mapReady)="onMapReady($event)"
+                            (coordinateTapped)="onCoordinateTapped($event)">
+                      </MapView>
+      <!--            (cameraChanged)="onCameraChanged($event)"
+                      (cameraMove)="onCameraMove($event)"
+                      (markerSelect)="onMarkerEvent($event)" 
+                      (markerBeginDragging)="onMarkerEvent($event)"
+                      (markerEndDragging)="onMarkerEvent($event)" 
+                      (markerDrag)="onMarkerEvent($event)"
+                      (markerInfoWindowTapped)="onMarkerEvent($event)" -->
+                        </StackLayout>
+                      </ng-template>
+                    </accordion:Accordion>
              </StackLayout>
            </GridLayout>
       </StackLayout>

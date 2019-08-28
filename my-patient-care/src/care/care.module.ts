@@ -16,6 +16,8 @@ import { CalendarComponent } from "./new-appointment/calendar/calendar.component
 import { CalendarStylesService } from "./new-appointment/shared/calendar.style.service";
 import { TreatmentService } from "./new-appointment/shared/treatment.service";
 import { CareComponent } from "./care.component";
+import { AccordionModule } from "nativescript-accordion/angular";
+
 
 @NgModule({
     imports: [
@@ -24,7 +26,8 @@ import { CareComponent } from "./care.component";
         NativeScriptUIListViewModule,
         NativeScriptFormsModule,
         CareRoutingModule,
-        NativeScriptUICalendarModule
+        NativeScriptUICalendarModule,
+        AccordionModule
     ],
     declarations: [
         AboutUsComponent,

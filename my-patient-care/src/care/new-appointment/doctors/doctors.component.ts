@@ -20,6 +20,7 @@ export class DoctorsComponent implements OnInit {
 
     title: string;
     private doctors: Array<Doctor>;
+    private treatmentId : number;
 
     constructor(
         private _routerExtensions: RouterExtensions,
@@ -33,8 +34,8 @@ export class DoctorsComponent implements OnInit {
         this.doctors = new Array<Doctor>();
         this._route.params.subscribe((params) => {
             this.title = "Doctors";
-            const treatmentId = params.treatmentId;
-            this.userService.getTreatmentDoctors(treatmentId).subscribe(
+            this.treatmentId = params.treatmentId;
+            this.userService.getTreatmentDoctors(this.treatmentId).subscribe(
                 (result: any) => {
                     this.doctors = result;
                 },
@@ -51,7 +52,7 @@ export class DoctorsComponent implements OnInit {
     onDoctorTap(doctor: Doctor) {
         this._routerExtensions.navigate([
             "care/calendar",
-            doctor.id],
+            this.treatmentId,doctor.id],
             {
                 animated: true,
                 transition: {

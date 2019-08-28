@@ -16,5 +16,7 @@ namespace WebRegisterAPI.Repositories.IRepositories
         IEnumerable<Appointment> GetAppointmentsForUser(string userId);
 
         IEnumerable<Appointment> GetAppointmentsForDate(string userId, DateTime date);
+
+        IEnumerable<Appointment> GetAppointmentsForDoctor(string doctorId, DateTime date);
     }
 }

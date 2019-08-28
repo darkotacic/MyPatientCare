@@ -1,6 +1,18 @@
 import { Color } from "tns-core-modules/color/color";
 import { Injectable } from "@angular/core";
-import { CalendarMonthViewStyle, CalendarSelectionShape, DayCellStyle, CalendarFontStyle, CalendarCellAlignment, CellStyle, CalendarWeekViewStyle, CalendarYearViewStyle, MonthCellStyle, CalendarDayViewStyle, DayEventsViewStyle, AllDayEventsViewStyle, CalendarMonthNamesViewStyle } from "nativescript-ui-calendar";
+import { CalendarMonthViewStyle, 
+    CalendarSelectionShape, 
+    DayCellStyle, 
+    CalendarFontStyle, 
+    CalendarCellAlignment, 
+    CellStyle, CalendarWeekViewStyle,
+    CalendarYearViewStyle, 
+    MonthCellStyle, 
+    CalendarDayViewStyle, 
+    DayEventsViewStyle, 
+    AllDayEventsViewStyle, 
+    CalendarMonthNamesViewStyle 
+} from "nativescript-ui-calendar";
 
 @Injectable()
 export class CalendarStylesService {
@@ -8,6 +20,7 @@ export class CalendarStylesService {
     private _lightYellowColor = new Color("#f1e8ca");
     private _greenBlueColor = new Color("#66bbae");
     private _darkBrownColor = new Color("#5b391e");
+    private _darkGrayColor = new Color("#595959");
     private _lightGreenColor = new Color("#9ebd9e");
     private _orangeColor = new Color("#dd855c");
     private _lightBrownColor = new Color("#dbcbbb");
@@ -29,9 +42,9 @@ export class CalendarStylesService {
         monthViewStyle.showTitle = true;
         monthViewStyle.showWeekNumbers = true;
         monthViewStyle.showDayNames = true;
-        monthViewStyle.selectionShape = CalendarSelectionShape.Round;
+         monthViewStyle.selectionShape = CalendarSelectionShape.None;
         monthViewStyle.selectionShapeSize = 15;
-        monthViewStyle.selectionShapeColor = this._redColor;
+        monthViewStyle.selectionShapeColor = this._redColor; 
 
         const todayCellStyle = new DayCellStyle();
         todayCellStyle.cellBackgroundColor = this._greenBlueColor;
@@ -89,7 +102,7 @@ export class CalendarStylesService {
         selectedCellStyle.cellBackgroundColor = this._lightBrownColor;
         selectedCellStyle.cellBorderWidth = 2;
         selectedCellStyle.cellBorderColor = this._brownColor;
-        selectedCellStyle.cellTextColor = this._blackColor;
+        selectedCellStyle.cellTextColor = this._darkGrayColor;
         selectedCellStyle.cellTextFontName = this._preferredFontName;
         selectedCellStyle.cellTextFontStyle = CalendarFontStyle.Bold;
         selectedCellStyle.cellTextSize = 18;
@@ -119,7 +132,7 @@ export class CalendarStylesService {
         titleCellStyle.cellBackgroundColor = this._lightGrayColor;
         titleCellStyle.cellBorderWidth = 1;
         titleCellStyle.cellBorderColor = this._brownColor;
-        titleCellStyle.cellTextColor = this._orangeColor;
+        titleCellStyle.cellTextColor = this._darkGrayColor;
         titleCellStyle.cellTextFontName = this._preferredFontName;
         titleCellStyle.cellTextFontStyle = CalendarFontStyle.Bold;
         titleCellStyle.cellTextSize = 18;

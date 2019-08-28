@@ -2,7 +2,7 @@
     <SearchBar hint="Search for any treatment by name"  (textChange)="onTextChanged($event)" (clear)="onClear($event)"></SearchBar>
     <Label text="Treatments" class="care-common-list-header text-uppercase t-14 p-l-15 p-t-30 p-b-7"></Label>
     <StackLayout class="hr-light"></StackLayout>
-    <ScrollView *ngIf="!isLoading" >
+    <ScrollView *ngIf="!isLoading"  height="100%">
         <StackLayout >
             <StackLayout *ngFor="let treatment of treatments._array; let index = index;" orientation="horizontal" (tap)="onTreatmentTap(treatment)">
                 <GridLayout rows="auto, auto" columns="*, auto" class="p-t-10 p-l-15">

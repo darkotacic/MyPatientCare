@@ -126,23 +126,22 @@ export class LoginComponent implements OnInit {
     checkNotifications() : void {
 /*         var date = new Date();
         var nextDay = new Date();
-       // nextDay.setDate(date.getDate() + 1);
-        nextDay.setHours(13);
-        nextDay.setMinutes(30);
+        nextDay.setDate(date.getDate() + 1);
+        nextDay.setHours(7);
+        nextDay.setMinutes(0);
         nextDay.setSeconds(0);
         nextDay.setMilliseconds(0);
         var timeDifference = nextDay.getTime()- date.getTime();
-        setTimeout(() => { */
+        console.log(timeDifference); */
+        //setTimeout(() => { 
             this.checkBackend();
              setInterval(() => {
                 this.checkBackend();
-            //}, this.MS_IN_DAY);   
-        }, 5000);  
+            }, this.MS_IN_DAY);   
         //}, timeDifference);
     }
 
     checkBackend() : void {
-         //console.log(this.prefs.getValue("reminder_preference", "60"));
          var notificationsBool = this.prefs.getValue("enabled_preference", false);
          var fcmtoken : string = this.appSettings.getString("fcmtoken");
          var notificationService = this.notificationService;
