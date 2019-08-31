@@ -8,7 +8,9 @@
         </StackLayout>
         <ActivityIndicator rowSpan="2" class="activity-indicator" [busy]="isLoading"></ActivityIndicator>
         <lv:RadListView *ngIf="!isLoading" #myListView row="1" 
+                        selectionBehavior="Press"
                         [items]="dataItems" 
+                        (itemSelected)="onItemSelected($event)"
                         enableCollapsibleGroups="true" 
                         [sortingFunction]="nameSortingFunc"
                         [groupingFunction]="myGroupingFunc" >
@@ -21,8 +23,8 @@
                             <Label row="1" col="0"  class="m-y-5" text="Doctor name: " class="text-left text-muted "></Label>
                             <Label row="1" col="1" class="m-y-5" [text]="item.doctorName" class="text-left text-muted"></Label>
                             <Label row="2" col="0"  class="m-y-5" text="Appointment date: " class="text-left text-muted"></Label>
-                            <Label row="2" col="1" class="m-y-5" [text]="item.stringDate" class="text-left text-muted"></Label>
-                        </GridLayout>sr-RS
+                            <Label row="2" col="1" class="m-y-5" [text]="item.stringDate+'h'" class="text-left text-muted"></Label>
+                        </GridLayout>
                         <Label col="1" text="&#xf105;" class="fa t-25 text-muted m-y-auto p-t-25 p-r-15 p-b-25 p-l-35"></Label>
                         <StackLayout *ngIf="index !== dataItems.length - 1" row="1" colSpan="2" class="hr-light"></StackLayout>
                     </GridLayout>

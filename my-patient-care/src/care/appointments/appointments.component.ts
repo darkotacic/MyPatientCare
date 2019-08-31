@@ -4,6 +4,8 @@ import { Appointment} from "./shared/appointment-model";
 import { AppointmentService } from "./shared/appointment.service";
 import { RadListViewComponent } from "nativescript-ui-listview/angular/listview-directives";
 import { action } from "tns-core-modules/ui/dialogs/dialogs";
+import { ListViewEventData, RadListView } from "nativescript-ui-listview";
+import { RouterExtensions } from "nativescript-angular/router";
 
 @Component({
     selector: "Appointments",
@@ -20,7 +22,10 @@ export class AppointmentsComponent implements OnInit {
     private _myGroupingFunc: (item: any) => any;
     @ViewChild("myListView", { read: RadListViewComponent,static: true }) myListViewComponent: RadListViewComponent;
 
-    constructor(private appointmentService: AppointmentService) {
+    constructor(
+        private appointmentService: AppointmentService,
+        private _routerExtensions : RouterExtensions
+        ) {
     } 
 
     get dataItems(): ObservableArray<Appointment> {
@@ -49,6 +54,22 @@ export class AppointmentsComponent implements OnInit {
         this.myGroupingFunc = (item: Appointment) => {
             return item.appointmentStatus;
         };
+    }
+
+    onItemSelected(args: ListViewEventData) {
+        const listview = args.object as RadListView;
+        const selectedAppointment= listview.getSelectedItems()[0] as Appointment;
+        this._routerExtensions.navigate([
+            "care/appointment-detail",
+            selectedAppointment.id,-1,-1,"date"],
+            {
+                animated: true,
+                transition: {
+                    name: "slide",
+                    duration: 200,
+                    curve: "ease"
+                }
+            });
     }
 
     get myGroupingFunc(): (item: any) => any {

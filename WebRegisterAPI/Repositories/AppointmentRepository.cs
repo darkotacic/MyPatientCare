@@ -43,7 +43,7 @@ namespace WebRegisterAPI.Repositories
 
         public Appointment GetAppointment(int Id)
         {
-            return _context.Appointments.Find(Id);
+            return GetAllAppointments().SingleOrDefault(appointment => appointment.Id == Id);
         }
 
         public IEnumerable<Appointment> GetAppointmentsForDate(string userId, DateTime date)

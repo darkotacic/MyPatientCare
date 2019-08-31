@@ -24,7 +24,7 @@ namespace WebRegisterAPI.Controllers
         }
         [HttpGet]
         [Route("HospitalInfo")]
-        public async Task<IActionResult> Appointments()
+        public async Task<IActionResult> GetHospitalInfo()
         {
             var claimsIdentity = User.Identity as ClaimsIdentity;
             var userId = claimsIdentity.FindFirst("UserID")?.Value;

@@ -15,16 +15,19 @@ namespace WebRegisterAPI.Services
         private readonly ITreatmentRepository treatmentRepository;
         private readonly IHolidayRepository holidayRepository;
         private readonly IScheduleRepository scheduleRepository;
+        private readonly IUserRepository userRepository;
 
         public AppointmentService(IAppointmentRepository appointmentRepository,
                                   ITreatmentRepository treatmentRepository,
                                   IHolidayRepository holidayRepository,
-                                  IScheduleRepository scheduleRepository)
+                                  IScheduleRepository scheduleRepository,
+                                  IUserRepository userRepository)
         {
             this.appointmentRepository = appointmentRepository;
             this.treatmentRepository = treatmentRepository;
             this.holidayRepository = holidayRepository;
             this.scheduleRepository = scheduleRepository;
+            this.userRepository = userRepository;
         }
 
         public Appointment CreateAppointment(CreateAppointmentViewModel viewModel)
@@ -70,14 +73,30 @@ namespace WebRegisterAPI.Services
             return null;
         }
 
-        private List<string> MapDates(List<DateTime> freeAppointments)
+        public AppointmentViewModel GetAppointment(int appointmentId)
         {
-            List<string> dates = new List<string>();
-            foreach (DateTime appointment in freeAppointments)
+            List<Appointment> tempList = new List<Appointment>
             {
-                dates.Add(appointment.ToString("HH:mm"));
-            }
-            return dates;
+                appointmentRepository.GetAppointment(appointmentId)
+            };
+            return Map(tempList).FirstOrDefault();
+        }
+
+        public AppointmentViewModel GetAppointmentDetails(string doctorId, int treatmentId, DateTime date)
+        {
+            Treatment treatment = treatmentRepository.GetTreatment(treatmentId);
+            ApplicationUser doctor = userRepository.GetUserById(doctorId);
+            return new AppointmentViewModel()
+            {
+                Id = 0,
+                DoctorId = doctor.Id,
+                AppointmentStatus = Status.PENDING.ToString(),
+                Date = date,
+                StringDate = date.ToString("MM/dd/yyyy HH:mm"),
+                DoctorName = doctor.FullName,
+                TreatmentId = treatment.Id,
+                TreatmentName = treatment.Name
+            };
         }
 
         public List<AppointmentViewModel> GetAllUserAppointments(string userId)
@@ -92,6 +111,16 @@ namespace WebRegisterAPI.Services
             return MillisecondMap(appointments);
         }
 
+        private List<string> MapDates(List<DateTime> freeAppointments)
+        {
+            List<string> dates = new List<string>();
+            foreach (DateTime appointment in freeAppointments)
+            {
+                dates.Add(appointment.ToString("HH:mm"));
+            }
+            return dates;
+        }
+
         private List<AppointmentViewModel> Map(List<Appointment> appointments)
         {
             List<AppointmentViewModel> viewModel = new List<AppointmentViewModel>();
@@ -104,7 +133,7 @@ namespace WebRegisterAPI.Services
                         DoctorId = appointment.DoctorId,
                         AppointmentStatus = appointment.AppointmentStatus.ToString(),
                         Date = appointment.Date,
-                        StringDate = appointment.Date.ToString("MM/dd/yyyy"),
+                        StringDate = appointment.Date.ToString("MM/dd/yyyy HH:mm"),
                         DoctorName = appointment.Doctor.FullName,
                         TreatmentId = appointment.TreatmentId,
                         TreatmentName = appointment.Treatment.Name
@@ -208,5 +237,6 @@ namespace WebRegisterAPI.Services
             }
             return availableDates;
         }
+
     }
 }

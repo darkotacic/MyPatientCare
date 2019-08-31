@@ -1,3 +1,4 @@
+import { AppointmentDetailComponent } from './appointments/appoitment-detail/appointment-detail.component';
 import { CalendarComponent } from './new-appointment/calendar/calendar.component';
 import { DoctorsComponent } from './new-appointment/doctors/doctors.component';
 import { NgModule } from "@angular/core";
@@ -12,6 +13,7 @@ const routes: Routes = [
     { path: "connect-detail/:id", component: ConnectDetailComponent },
     { path: "doctors/:treatmentId", component: DoctorsComponent },
     { path: "calendar/:treatmentId/:doctorId", component: CalendarComponent },
+    { path: "appointment-detail/:appointmentId/:treatmentId/:doctorId/:date", component: AppointmentDetailComponent },
 ];
 
 @NgModule({

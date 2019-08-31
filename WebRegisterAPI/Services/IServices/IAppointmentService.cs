@@ -15,5 +15,9 @@ namespace WebRegisterAPI.Services.IServices
 
         List<string> GetAllAvailableDates(string doctorId, DateTime date, int treatmentId);
 
+        AppointmentViewModel GetAppointment(int appointmentId);
+
+        AppointmentViewModel GetAppointmentDetails(string doctorId, int treatmentId, DateTime date);
+
     }
 }

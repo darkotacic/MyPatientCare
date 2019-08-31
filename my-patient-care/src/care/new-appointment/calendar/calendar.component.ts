@@ -18,10 +18,12 @@ export class CalendarComponent implements OnInit {
 
     @ViewChild("myfilter", {static: true}) myfilter: ElementRef;
     selectedDate: Date;
+    selectedDateString: string;
     selectedTime: string;
     treatmentId: number;
     doctorId: string;
     title: string;
+    pastDate: boolean;
     freeAppointments: Array<string>;
 
     _monthViewStyle: any;
@@ -59,16 +61,21 @@ export class CalendarComponent implements OnInit {
     onDateSelected(args: CalendarSelectionEventData) {
         this.selectedDate = args.date;
         this.selectedTime = null;
-        var selectedDateString = this.datepipe.transform(this.selectedDate, 'yyyy-MM-dd');
-        this._appointmentService.getAppointmentsForCalendar(this.doctorId,this.treatmentId,selectedDateString).subscribe(
-            (result : Array<string>) => {
-                this.freeAppointments = result;
-            },
-            (error : any) => {
-                this.freeAppointments.length = 0;
-                console.log(error);
-            }
-        )
+        this.pastDate = (this.selectedDate < new Date()) ? true : false;
+        this.selectedDateString = this.datepipe.transform(this.selectedDate, 'yyyy-MM-dd');
+        if(!this.pastDate){
+            this._appointmentService.getAppointmentsForCalendar(this.doctorId,this.treatmentId,this.selectedDateString).subscribe(
+                (result : Array<string>) => {
+                    this.freeAppointments = result;
+                },
+                (error : any) => {
+                    this.freeAppointments.length = 0;
+                    console.log(error);
+                }
+            )
+        } else {
+            this.freeAppointments.length = 0;
+        }
     }
 
     onViewModeChanged(args : CalendarSelectionEventData){
@@ -77,7 +84,20 @@ export class CalendarComponent implements OnInit {
     
     itemTapped(args : any) {
         this.selectedTime = args.selectedItem;
-        alert(this.selectedTime);
+        var time: string[] = this.selectedTime.split(":");
+        this.selectedDate.setHours(parseInt(time[0]),parseInt(time[1]));
+        var selectedDateTime = this.selectedDateString + " " + this.selectedTime;
+        this._routerExtensions.navigate([
+            "care/appointment-detail",
+            -1,this.treatmentId,this.doctorId, selectedDateTime],
+            {
+                animated: true,
+                transition: {
+                    name: "slide",
+                    duration: 200,
+                    curve: "ease"
+                }
+            });
     }
     
     showPicker() {

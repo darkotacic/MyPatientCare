@@ -1,33 +1,26 @@
-<!-- <ActionBar class="action-bar">
+ <ActionBar class="action-bar">
     <NavigationButton android.systemIcon="ic_menu_back" (tap)="onBackButtonTap()">
     </NavigationButton>
-    <Label class="action-bar-title" text=""></Label>
+    <Label class="action-bar-title" text="Appointment details"></Label>
 </ActionBar>
 
-<GridLayout class="page" rows="*, auto">
-    <GridLayout *ngIf="isReadOnlyActivity" rows="*, 5*">
-        <GridLayout rows="*, auto, auto" class="care-common-main-header p-b-10">
-            <Label row="1" [text]="activity.title" class="text-center font-weight-bold"></Label>
-            <Label row="2" [text]="activity.text" class="text-center text-muted"></Label>
-        </GridLayout>
-
-        <ScrollView row="1">
-            <StackLayout class="activity-detail-background">
-                <StackLayout class="hr-light"></StackLayout>
-                <Label text="Instructions" class="care-common-list-header text-uppercase t-14 p-l-15 p-t-30 p-b-7"></Label>
-                <Label [text]="activity.instructions" textWrap="true" class="activity-detail-instructions p-l-15 p-y-10"></Label>
-            </StackLayout>
-        </ScrollView>
-    </GridLayout>
-
-    <GridLayout *ngIf="!isReadOnlyActivity" rows="*, 5*">
-        <Label [text]="'Input your ' + activity.title" textWrap="true" class="text-center h2 p-10 m-y-auto"></Label>
-
-        <TextField (loaded)="onNumericFieldLoaded($event)" row="1" class="input align-top m-x-10" returnKeyType="done" keyboardType="number"
-            hint="Tap to answer" [(ngModel)]="value"></TextField>
-    </GridLayout>
-
-    <StackLayout *ngIf="!isReadOnlyActivity" row="1" class="m-x-auto m-t-30 m-b-30">
-        <Button class="btn btn-active btn-outline btn-rounded-sm" text="Done" (tap)="onDoneButtonTap()"></Button>
+<GridLayout *ngIf="!isLoading" class="page" rows="auto,auto" columns="auto,auto">
+    <StackLayout class="layout" row="0" col="0">
+        <Label text= "Doctor name: "></Label>
+        <Label text= "Treatment name: "></Label>
+        <Label text= "Appointment date: "></Label>
+        <Label text= "Appontment status: "></Label>
     </StackLayout>
-</GridLayout> -->
+    <StackLayout class="layout" row="0" col="1">
+        <Label [text]= "appointment.doctorName"></Label>
+        <Label [text]= "appointment.treatmentName"></Label>
+        <Label [text]= "appointment.stringDate+'h'"></Label>
+        <Label [text]= "appointment.appointmentStatus"></Label>
+    </StackLayout>
+    <StackLayout *ngIf="appointment.id == 0" row="1" colspan="2">
+        <Button class="btn btn-primary" text="Confirm reservation" (tap)="confirmReservation()"></Button>
+    </StackLayout>
+    <StackLayout *ngIf="appointment.id != 0" row="1" colspan="2">
+            <Button class="btn btn-primary" style="text-align: center" text="Contact doctor" (tap)="contactDoctor()"></Button>
+    </StackLayout>
+</GridLayout>

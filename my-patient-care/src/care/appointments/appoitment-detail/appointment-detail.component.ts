@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { AppointmentService } from './../shared/appointment.service';
 import { Component, OnInit } from "@angular/core";
 import { PageRoute, RouterExtensions } from "nativescript-angular/router";
@@ -13,30 +14,74 @@ import { Appointment } from '../shared/appointment-model';
 export class AppointmentDetailComponent implements OnInit {
 
     private appointment : Appointment;
+    isLoading : boolean;
 
     constructor(
         private appointmentService : AppointmentService,
-        private _pageRoute: PageRoute,
+        private _route: ActivatedRoute,
         private _routerExtensions: RouterExtensions
-    ) { }
-
-    ngOnInit(): void {
-        this._pageRoute.activatedRoute
-            .pipe(switchMap((activatedRoute) => activatedRoute.params))
-            .forEach((params) => {
-                this.appointmentService.getAppointment(params.id).subscribe(
-                    (res: Appointment) => {
-                        this.appointment = res;
-                    },
-                    error => {
-
-                    }
-                );
-            });
+    ) { 
+        this.appointment = new Appointment();
     }
 
-    onContactButtonTapped(): void {
-        
+    ngOnInit(): void {
+        this._route.params.subscribe((params) => {
+            if(params.appointmentId != -1){
+                this.isLoading = true;
+                this.appointmentService.getAppointment(params.appointmentId).subscribe(
+                    (res: Appointment) => {
+                        this.appointment = res;
+                        this.isLoading = false;
+                    },
+                    error => {
+                        console.log(error);
+                    }
+                );
+            } else {
+                this.isLoading = true;
+                this.appointmentService.getAppointmentDetails(params.doctorId,params.treatmentId,params.date).subscribe(
+                    (res: Appointment) => {
+                        this.appointment = res;
+                        this.isLoading = false;
+                    },
+                    error => {
+                        console.log(error);
+                    }
+                );
+            }
+        });
+    }
+
+    confirmReservation(): void {
+        this.appointmentService.createAppointment(this.appointment).subscribe(
+            (res: any) => {
+                alert("Appointment created successfully");
+                this._routerExtensions.navigate(["care"],
+                {
+                    animated: true,
+                    transition: {
+                        name: "slide",
+                        duration: 200,
+                        curve: "ease"
+                    }
+                });
+            },
+            error => {
+                console.log(error);
+            }
+        );
+    }
+
+    contactDoctor(): void {
+        this._routerExtensions.navigate(["care/connect-detail", this.appointment.doctorId],
+        {
+            animated: true,
+            transition: {
+                name: "slide",
+                duration: 200,
+                curve: "ease"
+            }
+        });
     }
 
     onBackButtonTap(): void {

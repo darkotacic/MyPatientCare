@@ -25,7 +25,7 @@
                 <Label *ngIf="selectedDate && freeAppointments.length == 0" textWrap="true" class="label" 
                     text="No available appointment slots. Please select another date">
                 </Label>
-                <Button *ngIf="selectedDate && freeAppointments.length > 0" text="Choose time" (tap)="showPicker()" class="button" ></Button>
+                <Button *ngIf="selectedDate && freeAppointments.length > 0 && !pastDate" text="Choose time" (tap)="showPicker()" class="button" ></Button>
             </StackLayout>     
         </GridLayout>
         <FilterableListpicker #myfilter  [blur]="dark" hintText="Type to filter..." [source]="freeAppointments"  (itemTapped)="itemTapped($event)"></FilterableListpicker>

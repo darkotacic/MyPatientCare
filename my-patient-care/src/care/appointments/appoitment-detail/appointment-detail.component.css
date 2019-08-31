@@ -5,3 +5,12 @@
 .activity-detail-instructions {
     background-color: #ffffff;
 } */
+
+.layout {
+    background-color: white;
+    text-align: left;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-left: 30px;
+    font-size: 20px;
+}

@@ -21,7 +21,6 @@ export class TreatmentComponent implements OnInit {
         private treatmentService : TreatmentService,
         private _routerExtensions : RouterExtensions
         ) {
-
     }
 
 

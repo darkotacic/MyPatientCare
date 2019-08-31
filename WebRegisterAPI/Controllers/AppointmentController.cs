@@ -40,6 +40,30 @@ namespace WebRegisterAPI.Controllers
         }
 
         [HttpGet]
+        [Route("{appointmentId}")]
+        public IActionResult GetAppointment(int appointmentId)
+        {
+            AppointmentViewModel appointment = appointmentService.GetAppointment(appointmentId);
+            if (appointment != null)
+            {
+                return Ok(appointment);
+            }
+            return NotFound(new { message = "No appointment with that id" });
+        }
+
+        [HttpGet]
+        [Route("AppointmentDetails")]
+        public IActionResult GetAppointmentDetails(string doctorId, int treatmentId, DateTime date)
+        {
+            AppointmentViewModel appointment = appointmentService.GetAppointmentDetails(doctorId, treatmentId, date);
+            if (appointment != null)
+            {
+                return Ok(appointment);
+            }
+            return NotFound(new { message = "No appointment with that id" });
+        }
+
+        [HttpGet]
         [Route("AppointmentsToday")]
         public IActionResult GetAppointmentsForDate()
         {
@@ -80,10 +104,13 @@ namespace WebRegisterAPI.Controllers
         {
             if (ModelState.IsValid)
             {
-                ApplicationUser patient = await userManager.FindByIdAsync(viewModel.PatientId);
+                var claimsIdentity = User.Identity as ClaimsIdentity;
+                var userId = claimsIdentity.FindFirst("UserID")?.Value;
+                ApplicationUser patient = await userManager.FindByIdAsync(userId);
                 ApplicationUser doctor = await userManager.FindByIdAsync(viewModel.DoctorId);
                 if (patient != null && doctor != null)
                 {
+                    viewModel.PatientId = userId;
                     Appointment appointment = appointmentService.CreateAppointment(viewModel);
                     if (appointment != null)
                     {

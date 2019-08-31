@@ -1,3 +1,4 @@
+import { AppointmentDetailComponent } from './appointments/appoitment-detail/appointment-detail.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptCommonModule } from "nativescript-angular/common";
@@ -38,6 +39,7 @@ import { AccordionModule } from "nativescript-accordion/angular";
         TreatmentComponent,
         DoctorsComponent,
         ConnectDetailComponent,
+        AppointmentDetailComponent
 
     ],
     providers: [CalendarStylesService,TreatmentService],

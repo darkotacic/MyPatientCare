@@ -10,11 +10,13 @@
 }
 
 .button {
-    height: 50;
-    width: 250;
+    height: 55;
+    width: 180;
     background-color: rgba(0,0,0,0.7);
     color: white;
     border-radius: 25;
     margin-top: 20;
+    margin-left: 10;
+    margin-right: 10;
 }
 
