@@ -1,0 +1,16 @@
+<ActionBar class="action-bar">
+    <Label class="action-bar-title" [text]="title"></Label>
+    <ActionItem (tap)="onLogOut()" ios.systemIcon="16" ios.position="right" text="Log Out" android.position="popup" ></ActionItem>
+</ActionBar>
+
+<TabView class="tab-view" (selectedIndexChanged)="onSelectedIndexChanged($event)">
+
+    <StackLayout *tabItem="{title: 'Care Contents', iconSource: getIconSource('home')}">
+        <Label text="TAB1"></Label>
+    </StackLayout>
+
+    <StackLayout *tabItem="{title: 'Connect', iconSource: getIconSource('search')}">
+        <Label text="TAB2"></Label>
+    </StackLayout>
+
+</TabView>
