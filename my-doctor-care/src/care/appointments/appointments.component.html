@@ -1,0 +1,35 @@
+<navigation:ExamplePage
+    xmlns:navigation="navigation/example-page"
+    xmlns:lv="nativescript-ui-listview" 
+    xmlns="http://www.nativescript.org/tns.xsd">
+    <GridLayout rows="auto, *">
+        <StackLayout orientation="vertical">
+            <Button  class="btn btn-primary" [text]="'Sort Options'" (tap)="sortOptions()" ios:margin="5"></Button>
+        </StackLayout>
+        <ActivityIndicator rowSpan="2" class="activity-indicator" [busy]="isLoading"></ActivityIndicator>
+        <lv:RadListView *ngIf="!isLoading" #myListView row="1" 
+                        selectionBehavior="Press"
+                        [items]="dataItems" 
+                        (itemSelected)="onItemSelected($event)"
+                        enableCollapsibleGroups="true" 
+                        [sortingFunction]="nameSortingFunc"
+                        [groupingFunction]="myGroupingFunc" >
+            <ng-template tkListItemTemplate let-item="item">
+                <StackLayout orientation="vertical">
+                    <GridLayout rows="auto, auto" columns="*, auto" class="p-t-10 p-l-15">
+                        <GridLayout rows="auto, auto, auto" columns="auto, *">
+                            <Label row="0" col="0" class="m-y-5" [text]="'Treatment name: '" class="text-left font-weight-bold"></Label>
+                            <Label row="0" col="1" class="m-y-5" [text]="item.treatmentName" class="text-left font-weight-bold"></Label>
+                            <Label row="1" col="0"  class="m-y-5" text="Patient name: " class="text-left text-muted "></Label>
+                            <Label row="1" col="1" class="m-y-5" [text]="item.patientName" class="text-left text-muted"></Label>
+                            <Label row="2" col="0"  class="m-y-5" text="Appointment date: " class="text-left text-muted"></Label>
+                            <Label row="2" col="1" class="m-y-5" [text]="item.stringDate+'h'" class="text-left text-muted"></Label>
+                        </GridLayout>
+                        <Label col="1" text="&#xf105;" class="fa t-25 text-muted m-y-auto p-t-25 p-r-15 p-b-25 p-l-35"></Label>
+                        <StackLayout *ngIf="index !== dataItems.length - 1" row="1" colSpan="2" class="hr-light"></StackLayout>
+                    </GridLayout>
+            </StackLayout>
+            </ng-template>
+        </lv:RadListView>
+    </GridLayout>
+</navigation:ExamplePage>

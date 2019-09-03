@@ -11,10 +11,12 @@ namespace WebRegisterAPI.Services
     public class TreatmentService : ITreatmentService
     {
         private readonly ITreatmentRepository treatmentRepository;
+        private readonly IUserRepository userRepository;
 
-        public TreatmentService(ITreatmentRepository treatmentRepository)
+        public TreatmentService(ITreatmentRepository treatmentRepository, IUserRepository userRepository)
         {
             this.treatmentRepository = treatmentRepository;
+            this.userRepository = userRepository;
         }
         public Treatment Add(Treatment treatment)
         {
@@ -31,13 +33,14 @@ namespace WebRegisterAPI.Services
             return treatmentRepository.GetAllTreatments();
         }
 
-        public List<ApplicationUserViewModel> GetDoctorsForTreatment(int treatmentId)
+        public List<ApplicationUserViewModel> GetDoctorsForTreatment(int treatmentId, string userId)
         {
             Treatment treatment = treatmentRepository.GetTreatment(treatmentId);
+            ApplicationUser user = userRepository.GetUserById(userId);
             List<ApplicationUserViewModel> viewModel = new List<ApplicationUserViewModel>();
             if (treatment != null)
             {
-                List<ApplicationUser> model = treatmentRepository.GetDoctorsForTreatment(treatment.TypeId).ToList();
+                List<ApplicationUser> model = treatmentRepository.GetDoctorsForTreatment(treatment.TypeId, user.HospitalId).ToList();
                 viewModel = Map(model);
             }
             return viewModel;
@@ -66,7 +69,7 @@ namespace WebRegisterAPI.Services
                         UserName = doctor.UserName,
                         FullName = doctor.FullName,
                         DoctorType = doctor.Type.Name
-                        
+
                     }
                );
             });

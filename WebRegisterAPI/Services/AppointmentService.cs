@@ -55,6 +55,30 @@ namespace WebRegisterAPI.Services
             return appointmentRepository.GetAllAppointments();
         }
 
+        public Appointment DenyAppointment(int appointmentId)
+        {
+            Appointment appointment = appointmentRepository.GetAppointment(appointmentId);
+            if (appointment != null && appointment.AppointmentStatus == Status.PENDING)
+            {
+                appointment.AppointmentStatus = Status.DENIED;
+                return appointmentRepository.Update(appointment);
+            }
+            return null;
+        }
+
+        public Appointment ConfirmAppointment(int appointmentId)
+        {
+            Appointment appointment = appointmentRepository.GetAppointment(appointmentId);
+            if (appointment != null && appointment.AppointmentStatus == Status.PENDING)
+            {
+                appointment.AppointmentStatus = Status.APPROVED;
+                appointmentRepository.Update(appointment);
+                appointmentRepository.DeletePendingAppointments(appointment);
+                return appointment;
+            }
+            return null;
+        }
+
         public List<string> GetAllAvailableDates(string doctorId, DateTime date, int treatmentId)
         {
             bool isOnHoliday = holidayRepository.CheckDateForUserHoliday(doctorId, date);
@@ -136,7 +160,8 @@ namespace WebRegisterAPI.Services
                         StringDate = appointment.Date.ToString("MM/dd/yyyy HH:mm"),
                         DoctorName = appointment.Doctor.FullName,
                         TreatmentId = appointment.TreatmentId,
-                        TreatmentName = appointment.Treatment.Name
+                        TreatmentName = appointment.Treatment.Name,
+                        PatientName = appointment.Patient.FullName
                     }
                );
             });
@@ -237,6 +262,5 @@ namespace WebRegisterAPI.Services
             }
             return availableDates;
         }
-
     }
 }

@@ -124,7 +124,10 @@ namespace WebRegisterAPI.Controllers
         [Route("TreatmentDoctors/{treatmentId}")]
         public IActionResult GetTreatmentDoctors(int treatmentId)
         {
-            List<ApplicationUserViewModel> doctors = treatmentService.GetDoctorsForTreatment(treatmentId);
+            var claimsIdentity = this.User.Identity as ClaimsIdentity;
+            var userId = claimsIdentity.FindFirst("UserID")?.Value;
+
+            List<ApplicationUserViewModel> doctors = treatmentService.GetDoctorsForTreatment(treatmentId, userId);
             if (doctors != null && doctors.Count > 0)
             {
                 return Ok(doctors);

@@ -12,6 +12,7 @@ namespace WebRegisterAPI.ViewModels
         public string StringDate { get; set; }
         public string DoctorId { get; set; }
         public string DoctorName { get; set; }
+        public string PatientName { get; set; }
         public string AppointmentStatus { get; set; }
         public string TreatmentName { get; set; }
         public int TreatmentId { get; set; }

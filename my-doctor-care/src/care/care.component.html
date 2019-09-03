@@ -5,12 +5,22 @@
 
 <TabView class="tab-view" (selectedIndexChanged)="onSelectedIndexChanged($event)">
 
-    <StackLayout *tabItem="{title: 'Care Contents', iconSource: getIconSource('home')}">
-        <Label text="TAB1"></Label>
+
+    <StackLayout *tabItem="{title: 'Appointments', iconSource: getIconSource('search')}"> 
+        <Appointments></Appointments>
     </StackLayout>
 
-    <StackLayout *tabItem="{title: 'Connect', iconSource: getIconSource('search')}">
-        <Label text="TAB2"></Label>
+    <StackLayout *tabItem="{title: 'Schedules', iconSource: getIconSource('search')}">
+        <Schedules></Schedules>
+    </StackLayout>
+
+
+    <StackLayout *tabItem="{title: 'Holidays', iconSource: getIconSource('search')}">
+        <Holidays></Holidays>
+    </StackLayout>
+
+    <StackLayout *tabItem="{title: 'Profile', iconSource: getIconSource('home')}">
+            <Profile></Profile>
     </StackLayout>
 
 </TabView>

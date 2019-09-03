@@ -12,6 +12,6 @@ namespace WebRegisterAPI.Repositories.IRepositories
         Treatment Add(Treatment treatment);
         Treatment Update(Treatment treatmentChanges);
         Treatment Delete(int id);
-        IEnumerable<ApplicationUser> GetDoctorsForTreatment(int typeId);
+        IEnumerable<ApplicationUser> GetDoctorsForTreatment(int typeId, int? hospitalId);
     }
 }

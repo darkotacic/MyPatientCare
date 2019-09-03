@@ -1,0 +1,26 @@
+ <ActionBar class="action-bar">
+    <NavigationButton android.systemIcon="ic_menu_back" (tap)="onBackButtonTap()">
+    </NavigationButton>
+    <Label class="action-bar-title" text="Appointment details"></Label>
+</ActionBar>
+
+<GridLayout *ngIf="!isLoading" class="page" rows="auto,auto,*" columns="auto,auto">
+    <StackLayout class="layout" row="0" col="0">
+        <Label text= "Patient name: "></Label>
+        <Label text= "Treatment name: "></Label>
+        <Label text= "Appointment date: "></Label>
+        <Label text= "Appontment status: "></Label>
+    </StackLayout>
+    <StackLayout class="layout" row="0" col="1">
+        <Label [text]= "appointment.patientName"></Label>
+        <Label [text]= "appointment.treatmentName"></Label>
+        <Label [text]= "appointment.stringDate+'h'"></Label>
+        <Label [text]= "appointment.appointmentStatus"></Label>
+    </StackLayout>
+    <StackLayout *ngIf="appointment.appointmentStatus == 'PENDING'" row="2" col="0">
+        <Button class="btn btn-danger" text="Deny reservation" (tap)="denyReservation()"></Button>
+    </StackLayout>
+    <StackLayout *ngIf="appointment.appointmentStatus == 'PENDING'" row="2" col="1">
+        <Button class="btn btn-success" text="Approve reservation" (tap)="approveReservation()"></Button>
+    </StackLayout>
+</GridLayout>

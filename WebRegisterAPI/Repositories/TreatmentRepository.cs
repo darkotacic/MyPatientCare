@@ -47,14 +47,14 @@ namespace WebRegisterAPI.Repositories
         public Treatment Update(Treatment treatmentChanges)
         {
             var treatment = _context.Treatments.Attach(treatmentChanges);
-            treatment.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            treatment.State = EntityState.Modified;
             _context.SaveChanges();
             return treatmentChanges;
         }
 
-        public IEnumerable<ApplicationUser> GetDoctorsForTreatment(int typeId)
+        public IEnumerable<ApplicationUser> GetDoctorsForTreatment(int typeId, int? hospitalId)
         {
-            return _context.ApplicationUsers.Where(user => user != null && user.TypeId == typeId)
+            return _context.ApplicationUsers.Where(user => user != null && user.TypeId == typeId && user.HospitalId == hospitalId)
                                             .Include(user => user.Type);
         }
     }

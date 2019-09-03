@@ -1,0 +1,28 @@
+/* .activity-detail-background {
+    background-color: #eeeeee;
+}
+
+.activity-detail-instructions {
+    background-color: #ffffff;
+} */
+
+.layout {
+    background-color: white;
+    text-align: left;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-left: 30px;
+    font-size: 20px;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+}

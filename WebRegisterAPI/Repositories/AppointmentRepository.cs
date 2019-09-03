@@ -35,10 +35,20 @@ namespace WebRegisterAPI.Repositories
             return appointment;
         }
 
+        public void DeletePendingAppointments(Appointment appointment)
+        {
+            _context.Appointments.RemoveRange(_context.Appointments.Where(app => (app.AppointmentStatus == Status.PENDING &&
+                                               (app.Date > appointment.Date && app.Date < appointment.Date.AddMinutes(appointment.Treatment.Duration)) ||
+                                               (app.Date.AddMinutes(app.Treatment.Duration) > appointment.Date && app.Date.AddMinutes(app.Treatment.Duration) < appointment.Date.AddMinutes(appointment.Treatment.Duration)) ||
+                                               (app.Date < appointment.Date && app.Date.AddMinutes(app.Treatment.Duration) > appointment.Date.AddMinutes(appointment.Treatment.Duration)))));
+            _context.SaveChanges();
+        }
+
         public IEnumerable<Appointment> GetAllAppointments()
         {
             return _context.Appointments.Include(a => a.Treatment)
-                                        .Include(a => a.Doctor);
+                                        .Include(a => a.Doctor)
+                                        .Include(a => a.Patient);
         }
 
         public Appointment GetAppointment(int Id)
@@ -77,7 +87,15 @@ namespace WebRegisterAPI.Repositories
             ApplicationUser user = _context.ApplicationUsers.Find(userId);
             if (user != null)
             {
-                IEnumerable<Appointment> userAppointments = GetAllAppointments().Where(appointment => appointment != null && appointment.PatientId == userId);
+                IEnumerable<Appointment> userAppointments = null;
+                if (user.TypeId != null)
+                {
+                    userAppointments = GetAllAppointments().Where(appointment => appointment != null && appointment.DoctorId == userId);
+                }
+                else
+                {
+                    userAppointments = GetAllAppointments().Where(appointment => appointment != null && appointment.PatientId == userId);
+                }
                 return userAppointments;
             }
             return null;

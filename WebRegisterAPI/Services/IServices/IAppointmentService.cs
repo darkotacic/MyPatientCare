@@ -19,5 +19,8 @@ namespace WebRegisterAPI.Services.IServices
 
         AppointmentViewModel GetAppointmentDetails(string doctorId, int treatmentId, DateTime date);
 
+        Appointment DenyAppointment(int appointmentId);
+        Appointment ConfirmAppointment(int appointmentId);
+
     }
 }

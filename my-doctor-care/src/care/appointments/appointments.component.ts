@@ -61,7 +61,7 @@ export class AppointmentsComponent implements OnInit {
         const selectedAppointment= listview.getSelectedItems()[0] as Appointment;
         this._routerExtensions.navigate([
             "care/appointment-detail",
-            selectedAppointment.id,-1,-1,"date"],
+            selectedAppointment.id],
             {
                 animated: true,
                 transition: {

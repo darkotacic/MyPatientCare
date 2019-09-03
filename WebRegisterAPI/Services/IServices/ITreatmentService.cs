@@ -12,6 +12,6 @@ namespace WebRegisterAPI.Services.IServices
         Treatment Update(Treatment treatmentChanges);
         Treatment Delete(int id);
 
-        List<ApplicationUserViewModel> GetDoctorsForTreatment(int treatmentId);
+        List<ApplicationUserViewModel> GetDoctorsForTreatment(int treatmentId, string userId);
     }
 }

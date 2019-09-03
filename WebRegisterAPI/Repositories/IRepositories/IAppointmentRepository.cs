@@ -13,6 +13,8 @@ namespace WebRegisterAPI.Repositories.IRepositories
         Appointment Update(Appointment appointmentChange);
         Appointment Delete(int id);
 
+        void DeletePendingAppointments(Appointment appointment);
+
         IEnumerable<Appointment> GetAppointmentsForUser(string userId);
 
         IEnumerable<Appointment> GetAppointmentsForDate(string userId, DateTime date);

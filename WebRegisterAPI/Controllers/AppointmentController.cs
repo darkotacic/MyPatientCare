@@ -120,5 +120,29 @@ namespace WebRegisterAPI.Controllers
             }
             return BadRequest(new { message = "Invalid model request" });
         }
+
+        [HttpGet]
+        [Route("Deny/{appointmentId}")]
+        public IActionResult DenyAppointment(int appointmentId)
+        {
+            Appointment appointment = appointmentService.DenyAppointment(appointmentId);
+            if (appointment != null)
+            {
+                return Ok(appointment);
+            }
+            return BadRequest(new { message = "Invalid appointmentId" });
+        }
+
+        [HttpGet]
+        [Route("Confirm/{appointmentId}")]
+        public IActionResult ConfirmAppointment(int appointmentId)
+        {
+            Appointment appointment = appointmentService.ConfirmAppointment(appointmentId);
+            if (appointment != null)
+            {
+                return Ok(appointment);
+            }
+            return BadRequest(new { message = "Invalid appointmentId" });
+        }
     }
 }
