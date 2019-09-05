@@ -4,7 +4,7 @@
     <Label class="action-bar-title" text="Appointment details"></Label>
 </ActionBar>
 
-<GridLayout *ngIf="!isLoading" class="page" rows="auto,auto,*" columns="auto,auto">
+<GridLayout *ngIf="!isLoading" class="page" rows="auto,*" columns="*,*">
     <StackLayout class="layout" row="0" col="0">
         <Label text= "Patient name: "></Label>
         <Label text= "Treatment name: "></Label>
@@ -17,10 +17,10 @@
         <Label [text]= "appointment.stringDate+'h'"></Label>
         <Label [text]= "appointment.appointmentStatus"></Label>
     </StackLayout>
-    <StackLayout *ngIf="appointment.appointmentStatus == 'PENDING'" row="2" col="0">
+    <StackLayout *ngIf="appointment.appointmentStatus == 'PENDING'" row="1" col="0">
         <Button class="btn btn-danger" text="Deny reservation" (tap)="denyReservation()"></Button>
     </StackLayout>
-    <StackLayout *ngIf="appointment.appointmentStatus == 'PENDING'" row="2" col="1">
+    <StackLayout *ngIf="appointment.appointmentStatus == 'PENDING'" row="1" col="1">
         <Button class="btn btn-success" text="Approve reservation" (tap)="approveReservation()"></Button>
     </StackLayout>
 </GridLayout>

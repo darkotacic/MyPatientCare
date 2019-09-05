@@ -2,8 +2,8 @@ import { ActivatedRoute } from '@angular/router';
 import { AppointmentService } from './../shared/appointment.service';
 import { Component, OnInit } from "@angular/core";
 import { PageRoute, RouterExtensions } from "nativescript-angular/router";
-import { switchMap } from "rxjs/operators";
 import { Appointment } from '../shared/appointment-model';
+import * as dialogs from "tns-core-modules/ui/dialogs";
 
 @Component({
     selector: "AppointmentDetails",
@@ -40,51 +40,69 @@ export class AppointmentDetailComponent implements OnInit {
     }
 
     denyReservation(){
-        this.appointmentService.denyAppointment(this.appointment.id).subscribe(
-            (res: Appointment) => {
-                alert({
-                    title: "Success!",
-                    message: "Appointment denied successfully",
-                    okButtonText: "Ok"
-                });
-                this._routerExtensions.navigate(["care"],
-                {
-                    animated: true,
-                    transition: {
-                        name: "slide",
-                        duration: 200,
-                        curve: "ease"
+        dialogs.confirm({
+            title: "Deny reservation",
+            message: "Are you shure you want to deny the reservation?",
+            okButtonText: "Continue",
+            cancelButtonText: "Cancel",
+        }).then(result => {
+            if(result) {
+                this.appointmentService.denyAppointment(this.appointment.id).subscribe(
+                    (res: Appointment) => {
+                        alert({
+                            title: "Success!",
+                            message: "Appointment denied successfully",
+                            okButtonText: "Ok"
+                        });
+                        this._routerExtensions.navigate(["care"],
+                        {
+                            animated: true,
+                            transition: {
+                                name: "slide",
+                                duration: 200,
+                                curve: "ease"
+                            }
+                        });
+                    },
+                    error => {
+                        console.log(error);
                     }
-                });
-            },
-            error => {
-                console.log(error);
+                );
             }
-        );
+        });
     }
 
     approveReservation(){
-        this.appointmentService.confirmAppointment(this.appointment.id).subscribe(
-            (res: Appointment) => {
-                alert({
-                    title: "Success!",
-                    message: "Appointment confirmed successfully",
-                    okButtonText: "Ok"
-                });
-                this._routerExtensions.navigate(["care"],
-                {
-                    animated: true,
-                    transition: {
-                        name: "slide",
-                        duration: 200,
-                        curve: "ease"
+        dialogs.confirm({
+            title: "Confirm reservation warning",
+            message: "Confirming a reservation will result in deletion of any pending reservations which dates intersects the selected reservation!",
+            okButtonText: "Continue",
+            cancelButtonText: "Cancel",
+        }).then(result => {
+            if(result) {
+                this.appointmentService.confirmAppointment(this.appointment.id).subscribe(
+                    (res: Appointment) => {
+                        alert({
+                            title: "Success!",
+                            message: "Appointment confirmed successfully",
+                            okButtonText: "Ok"
+                        });
+                        this._routerExtensions.navigate(["care"],
+                        {
+                            animated: true,
+                            transition: {
+                                name: "slide",
+                                duration: 200,
+                                curve: "ease"
+                            }
+                        });
+                    },
+                    error => {
+                        console.log(error);
                     }
-                });
-            },
-            error => {
-                console.log(error);
+                );
             }
-        );
+        });
     }
 
     onBackButtonTap(): void {

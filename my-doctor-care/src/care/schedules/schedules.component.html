@@ -1,23 +1,31 @@
-<StackLayout>
+<navigation:ExamplePage
+        xmlns:navigation="navigation/example-page"
+        xmlns:lv="nativescript-ui-listview" 
+        xmlns="http://www.nativescript.org/tns.xsd">
         <Label text="Schedules" class="care-common-list-header text-uppercase t-14 p-l-15 p-t-30 p-b-7"></Label>
         <StackLayout class="hr-light"></StackLayout>
-<!--         <ScrollView *ngIf="!isLoading"  height="100%">
-            <StackLayout >
-                <StackLayout *ngFor="let treatment of treatments._array; let index = index;" orientation="horizontal" (tap)="onTreatmentTap(treatment)">
-                    <GridLayout rows="auto, auto" columns="*, auto" class="p-t-10 p-l-15">
-                        <GridLayout rows="auto, auto" columns="auto, *">
-                            <Label row="0" col="0" class="m-y-5" colSpan="2" [text]="treatment.name" class="text-left font-weight-bold"></Label>
-                            <Label row="1" col="0" class="m-y-5" text="Duration:" class="text-left text-muted "></Label>
-                            <Label row="1" col="1" class="m-y-5" [text]="treatment.duration+' minutes'" class="text-left text-muted m-l-5"></Label>
+        <GridLayout rows="auto, *">
+            <ActivityIndicator rowSpan="2" class="activity-indicator" [busy]="isLoading"></ActivityIndicator>
+            <lv:RadListView *ngIf="!isLoading" #myListView row="1" 
+                            selectionBehavior="Press"
+                            [items]="schedulesModel.schedules" 
+                            (itemSelected)="onItemSelected($event)" >
+                <ng-template tkListItemTemplate let-item="item">
+                    <StackLayout orientation="vertical">
+                        <GridLayout rows="auto, auto" columns="*, auto" class="p-t-10 p-l-15">
+                            <GridLayout rows="auto, auto, auto" columns="auto, auto">
+                                <Label row="0" col="0" class="m-y-5" [text]="'Day of the week: '" class="text-left font-weight-bold"></Label>
+                                <Label row="0" col="1" class="m-y-5" [text]="item.dayOfWeekName" class="text-left font-weight-bold"></Label>
+                                <Label row="1" col="0"  class="m-y-5" text="Start time: " class="text-left text-muted "></Label>
+                                <Label row="1" col="1" class="m-y-5" [text]="item.startTime+'h'" class="text-left text-muted"></Label>
+                                <Label row="2" col="0"  class="m-y-5" text="End time: " class="text-left text-muted"></Label>
+                                <Label row="2" col="1" class="m-y-5" [text]="item.endTime+'h'" class="text-left text-muted"></Label>
+                            </GridLayout>
+                            <StackLayout *ngIf="index !== schedulesModel.schedules.length - 1" row="1" colSpan="2" class="hr-light"></StackLayout>
                         </GridLayout>
-    
-                        <Label col="1" text="&#xf105;" class="fa t-25 text-muted m-y-auto p-t-25 p-r-15 p-b-25 p-l-35"></Label>
-                        <StackLayout *ngIf="index !== treatments.length - 1" row="1" colSpan="2" class="hr-light"></StackLayout>
-                    </GridLayout>
                 </StackLayout>
-            </StackLayout>
-        </ScrollView> 
-        <StackLayout *ngIf="treatments && treatments._array.length == 0">
-            <label class="h3 p-t-30 text-center" text="No treatments match the given name"></label>
-        </StackLayout> -->
-</StackLayout>
+                </ng-template>
+            </lv:RadListView>
+        </GridLayout>
+        <float-btn></float-btn>
+</navigation:ExamplePage>

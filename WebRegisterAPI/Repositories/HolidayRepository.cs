@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using WebRegisterAPI.Database;
 using WebRegisterAPI.Models;
 using WebRegisterAPI.Repositories.IRepositories;

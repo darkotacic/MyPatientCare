@@ -1,11 +1,11 @@
 export class Appointment {
-    public id: number;
-    public date: Date;
-    public stringDate: string;
-    public doctorId: string;
-    public doctorName: string;
-    public patientName: string;
-    public appointmentStatus: string;
-    public treatmentName: string;
-    public treatmentId: number;
+    id: number;
+    date: Date;
+    stringDate: string;
+    doctorId: string;
+    doctorName: string;
+    patientName: string;
+    appointmentStatus: string;
+    treatmentName: string;
+    treatmentId: number;
 }

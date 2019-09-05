@@ -70,6 +70,7 @@
             services.AddScoped<IHospitalRepositoy, HospitalRepository>();
             services.AddScoped<IHolidayRepository, HolidayRepository>();
             services.AddScoped<IScheduleRepository, ScheduleRepository>();
+            services.AddScoped<IScheduleService, ScheduleService>();
 
             services.Configure<IdentityOptions>(options =>
             {

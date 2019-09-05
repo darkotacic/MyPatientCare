@@ -4,7 +4,7 @@
     <Label class="action-bar-title" text="Appointment details"></Label>
 </ActionBar>
 
-<GridLayout *ngIf="!isLoading" class="page" rows="auto,auto" columns="auto,auto">
+<GridLayout *ngIf="!isLoading" class="page" rows="auto,*" columns="*,*">
     <StackLayout class="layout" row="0" col="0">
         <Label text= "Doctor name: "></Label>
         <Label text= "Treatment name: "></Label>
@@ -21,6 +21,6 @@
         <Button class="btn btn-primary" text="Confirm reservation" (tap)="confirmReservation()"></Button>
     </StackLayout>
     <StackLayout *ngIf="appointment.id != 0" row="1" colspan="2">
-            <Button class="btn btn-primary" style="text-align: center" text="Contact doctor" (tap)="contactDoctor()"></Button>
+        <Button class="btn btn-primary" style="text-align: center" text="Contact doctor" (tap)="contactDoctor()"></Button>
     </StackLayout>
 </GridLayout>

@@ -1,13 +1,13 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:accordion="nativescript-accordion">
   <GridLayout rows="*,*,2*" columns="*" *ngIf="isLoaded">
     <StackLayout row="0" column = "0">
-          <GridLayout columns="*,2* " rows="*" verticalAlignment="top">
-            <StackLayout  row="0" col="0">
-              <Image src="res://icon"></Image>
-            </StackLayout>
-            <StackLayout class="border" row="0" col="1">
-              <Label class="label"  [text]="hospital.name" textWrap="true"  margin="40"></Label>
-            </StackLayout>     
+          <GridLayout columns="*,3* " rows="*">
+              <StackLayout  row="0" col="0">
+                <Image src="res://icon"></Image>
+              </StackLayout>
+              <StackLayout class="border" row="0" col="1">
+                <Label class="label hospital-name"  [text]="hospital.name" textWrap="true" ></Label>
+              </StackLayout>     
            </GridLayout>
      </StackLayout>
     <ScrollView row="1" column = "0" height="100%">
@@ -17,13 +17,13 @@
     </ScrollView>
     <StackLayout row="2" column = "0">
         <GridLayout columns="*,*" rows="*,*" verticalAlignment="top">
-            <StackLayout class="border" row="0" col="0" orientation="horizontal">
-                <Label class="label" text="Director:" textWrap="true" verticalAlignment="center"></Label>
-              <Label class="label" [text]="hospital.directorName" textWrap="true"  verticalAlignment="center" horizontalAlignment="center"  margin="20"></Label>
+            <StackLayout class="border" row="0" col="0" orientation="vertical">
+                <Label class="label" text="Director:" textWrap="true" verticalAlignment="center" margin-top="5"></Label>
+                <Label class="label" [text]="hospital.directorName" textWrap="true"  verticalAlignment="center" horizontalAlignment="center" margin="10"></Label>
              </StackLayout>
-            <StackLayout class="border" row="1" col="0" orientation="horizontal" >
-              <Label class="label" text="Address:" textWrap="true" verticalAlignment="center"></Label>
-              <Label class="label" [text]="hospital.address" textWrap="true" verticalAlignment="center"></Label>
+            <StackLayout class="border" row="1" col="0" orientation="vertical" >
+              <Label class="label" text="Address:" textWrap="true" verticalAlignment="center" margin-top="5"></Label>
+              <Label class="label" [text]="hospital.address" textWrap="true" verticalAlignment="center" margin="10"></Label>
             </StackLayout>     
             <StackLayout row="0" col="1" rowspan="2">
                   <accordion:Accordion  [items]="items" allowMultiple="false" [selectedIndexes]="selectedIndexes">

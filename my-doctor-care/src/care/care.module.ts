@@ -10,6 +10,9 @@ import { NativeScriptUIListViewModule } from "nativescript-ui-listview/angular";
 import { CareRoutingModule } from "./care-routing.module";
 import { CareComponent } from "./care.component";
 import { AppointmentDetailComponent } from './appointments/appoitment-detail/appointment-detail.component';
+import { ScheduleService } from './schedules/shared/schedule.service';
+import { AppointmentService } from './appointments/shared/appointment.service';
+import { FloatBtnComponenet } from './float-button/float-btn-component';
 
 @NgModule({
     imports: [
@@ -25,9 +28,13 @@ import { AppointmentDetailComponent } from './appointments/appoitment-detail/app
         SchedulesComponent,
         AppointmentsComponent,
         HolidaysComponent,
-        AppointmentDetailComponent
+        AppointmentDetailComponent,
+        FloatBtnComponenet
     ],
-    providers: [],
+    providers: [
+        ScheduleService,
+        AppointmentService
+    ],
     schemas: [
         NO_ERRORS_SCHEMA
     ]

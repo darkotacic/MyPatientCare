@@ -15,7 +15,7 @@ namespace WebRegisterAPI.Repositories
 
         public IEnumerable<Schedule> GetAllSchedulesForDoctor(string doctorId)
         {
-            return _context.Schedules.Where(schedule => schedule.DoctorId == doctorId);
+            return _context.Schedules.Where(schedule => schedule.DoctorId == doctorId).OrderBy(schedule => schedule.DayOfWeek);
         }
 
         public Schedule GetScheduleForDoctor(string doctorId, DayOfWeek day)
