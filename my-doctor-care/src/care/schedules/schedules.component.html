@@ -4,12 +4,13 @@
         xmlns="http://www.nativescript.org/tns.xsd">
         <Label text="Schedules" class="care-common-list-header text-uppercase t-14 p-l-15 p-t-30 p-b-7"></Label>
         <StackLayout class="hr-light"></StackLayout>
-        <GridLayout rows="auto, *">
-            <ActivityIndicator rowSpan="2" class="activity-indicator" [busy]="isLoading"></ActivityIndicator>
-            <lv:RadListView *ngIf="!isLoading" #myListView row="1" 
+
+        <StackLayout>
+            <lv:RadListView height="70%" *ngIf="!isLoading" #myListView row="1" 
                             selectionBehavior="Press"
                             [items]="schedulesModel.schedules" 
-                            (itemSelected)="onItemSelected($event)" >
+                            (itemSelected)="onItemSelected($event)"
+                            (itemDeselected)="onitemDeselected($event)" >
                 <ng-template tkListItemTemplate let-item="item">
                     <StackLayout orientation="vertical">
                         <GridLayout rows="auto, auto" columns="*, auto" class="p-t-10 p-l-15">
@@ -26,6 +27,11 @@
                 </StackLayout>
                 </ng-template>
             </lv:RadListView>
-        </GridLayout>
-        <float-btn></float-btn>
+            <ActivityIndicator  class="activity-indicator" [busy]="isLoading"></ActivityIndicator>
+            <StackLayout class="float-btn-container">
+                <StackLayout  [ngClass]="selectedSchedule != null ? 'float-btn-edit':'float-btn'">
+                    <Label class="float-btn-text" [text]="buttonText"></Label>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
 </navigation:ExamplePage>

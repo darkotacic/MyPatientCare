@@ -10,8 +10,8 @@
               </StackLayout>     
            </GridLayout>
      </StackLayout>
-    <ScrollView row="1" column = "0" height="100%">
-        <StackLayout>
+    <ScrollView row="1" column = "0">
+        <StackLayout height="100%">
             <Label fontSize="20" [text]="hospital.description" textWrap="true" padding="3"></Label>
        </StackLayout>
     </ScrollView>
@@ -40,13 +40,6 @@
                             [tilt]="tilt" (mapReady)="onMapReady($event)"
                             (coordinateTapped)="onCoordinateTapped($event)">
                       </MapView>
-      <!--            (cameraChanged)="onCameraChanged($event)"
-                      (cameraMove)="onCameraMove($event)"
-                      (markerSelect)="onMarkerEvent($event)" 
-                      (markerBeginDragging)="onMarkerEvent($event)"
-                      (markerEndDragging)="onMarkerEvent($event)" 
-                      (markerDrag)="onMarkerEvent($event)"
-                      (markerInfoWindowTapped)="onMarkerEvent($event)" -->
                         </StackLayout>
                       </ng-template>
                     </accordion:Accordion>

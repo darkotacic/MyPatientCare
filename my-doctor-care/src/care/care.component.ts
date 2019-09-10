@@ -27,7 +27,7 @@ export class CareComponent {
 
         this.title = selectedTabViewItem.title;
     }
-    onLogOut(){
+    onLogOut() {
         this.appSettings.remove("token");
         this._routerExtensions.navigate(["/login"],
         {

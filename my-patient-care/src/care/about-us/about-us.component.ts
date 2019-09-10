@@ -5,7 +5,6 @@ import { registerElement } from "nativescript-angular/element-registry";
 import { MapView, Marker, Position } from "nativescript-google-maps-sdk";
 import * as utils from "tns-core-modules/utils/utils";
 
-
 // Important - must register MapView plugin in order to use in Angular templates
 registerElement("MapView", () => MapView);
 
@@ -18,10 +17,9 @@ registerElement("MapView", () => MapView);
 
 export class AboutUsComponent implements OnInit {
 
-    public items: any[];
-    public selectedIndexes = [0];
+    items: Array<any>;
+    selectedIndexes = [0];
     
-
     hospital: Hospital;
     isLoaded: boolean;
 
@@ -53,8 +51,8 @@ export class AboutUsComponent implements OnInit {
 
         this.items = [
             {
-                title: 'Toggle map!',
-                items: [{ text: 'Map!'}]
+                title: "Toggle map!",
+                items: [{ text: "Map!"}]
             }
         ];
     }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { messaging } from "nativescript-plugin-firebase/messaging";
-import {registerElement} from "nativescript-angular/element-registry";
+import { registerElement } from "nativescript-angular/element-registry";
 registerElement("FilterableListpicker", () => require("nativescript-filterable-listpicker").FilterableListpicker);
 
 @Component({
@@ -13,10 +13,9 @@ export class AppComponent implements OnInit {
 
     ngOnInit() {
         const firebase = require("nativescript-plugin-firebase");
-        if (this.appSettings.getString("BaseURI") != "http://192.168.1.3:5000/api") {
-            this.appSettings.setString("BaseURI", "http://192.168.1.3:5000/api");
-        } 
-        //this.appSettings.setString("BaseURI", "http://192.168.1.8:5000/api");
+        if (this.appSettings.getString("BaseURI") !== "http://192.168.43.89:5000/api") {
+            this.appSettings.setString("BaseURI", "http://192.168.43.89:5000/api");
+        }
         console.log(this.appSettings.getString("BaseURI"));
         
         firebase.init({

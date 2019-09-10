@@ -6,3 +6,28 @@
     background-color: #efeff4;
     color: #6d6d72;
 }
+
+ .float-btn-container {
+    margin-left: 70%;
+} 
+
+.float-btn {
+    background-color: #30bcff;
+    width: 56;
+    border-radius: 28;
+    height: 56;
+    text-align: center;
+    vertical-align: middle;
+}
+.float-btn-edit {
+    background-color: #30bcff;
+    width: 108;
+    border-radius: 28;
+    height: 56;
+    text-align: center;
+    vertical-align: middle;
+}
+.float-btn-text {
+    color: #ffffff;
+    font-size: 36;
+}
