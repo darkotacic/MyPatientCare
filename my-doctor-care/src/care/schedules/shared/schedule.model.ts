@@ -1,10 +1,10 @@
 export class Schedules {
     schedules: Array<Schedule>;
-    freeDays: Map<number, string>;
+    freeDays: FreeDays;
 
-    constructor() {
-        this.schedules = new Array<Schedule>();
-        this.freeDays = new Map<number, string>();
+    constructor(map: Map<number,string>, schedules : Array<Schedule>) {
+        this.schedules = schedules;
+        this.freeDays = new FreeDays(map);
     }
 }
 
@@ -16,4 +16,18 @@ export class Schedule {
     startTime: number;
     endTime: number;
     doctorId: string;
+
+    constructor() {
+        this.dayOfWeek = null;
+        this.startTime = 0;
+        this.endTime = 0;
+    }
+}
+
+export class FreeDays {
+    freeDays: Map<number, string>;
+
+    constructor(map: Map<number,string>) {
+        this.freeDays = map;        
+    }
 }

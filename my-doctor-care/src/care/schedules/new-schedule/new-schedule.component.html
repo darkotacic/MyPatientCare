@@ -1,0 +1,48 @@
+<ActionBar class="action-bar">
+    <NavigationButton android.systemIcon="ic_menu_back" (tap)="onBackButtonTap()">
+    </NavigationButton>
+    <Label class="action-bar-title" [text]="title"></Label>
+</ActionBar>
+
+<GridLayout>
+    <ScrollView>
+            <StackLayout *ngIf="!isLoading" class="page p-t-30">
+                <StackLayout class="p-t-20">
+                    <RadDataForm #createScheduleFormElement [source]="schedule" [isReadOnly]="isLoading" >
+                        <TKPropertyGroup tkDataFormGroups collapsible="false" name="MY GROUP" titleHidden="true" hidden="false">
+                            <TKEntityProperty  tkPropertyGroupProperties name="dayOfWeek" displayName="Day of week" hintText="Pick a day" required="true" index="0"
+                                [valuesProvider]="freeDays">
+                                <TKPropertyEditor tkEntityPropertyEditor type="Picker">
+                                    <TKPropertyEditorStyle tkPropertyEditorStyle labelFontStyle="Bold"></TKPropertyEditorStyle>
+                                </TKPropertyEditor>
+                            </TKEntityProperty>
+    
+                            <TKEntityProperty tkPropertyGroupProperties name="startTime" displayName="Start time (hours)" hintText="Enter start time" required="true"
+                                index="1">
+                                <TKPropertyEditor tkEntityPropertyEditor type="Number">
+                                    <TKPropertyEditorStyle tkPropertyEditorStyle labelFontStyle="Bold"></TKPropertyEditorStyle>
+                                </TKPropertyEditor>
+                                <TKNonEmptyValidator tkEntityPropertyValidators errorMessage="Start time is required."></TKNonEmptyValidator>
+                                <MaxTimeValidator tkEntityPropertyValidators></MaxTimeValidator>
+                                <MinTimeValidator tkEntityPropertyValidators></MinTimeValidator>
+                            </TKEntityProperty>
+    
+                            <TKEntityProperty tkPropertyGroupProperties name="endTime" displayName="End time (hours)" hintText="Enter end time"
+                                required="true" index="2">
+                                <TKPropertyEditor tkEntityPropertyEditor type="Number">
+                                    <TKPropertyEditorStyle tkPropertyEditorStyle labelFontStyle="Bold"></TKPropertyEditorStyle>
+                                </TKPropertyEditor>
+                                <TKNonEmptyValidator tkEntityPropertyValidators errorMessage="End time confirm is required."></TKNonEmptyValidator>
+                                <MaxTimeValidator tkEntityPropertyValidators></MaxTimeValidator>
+                                <MinTimeValidator tkEntityPropertyValidators></MinTimeValidator>
+                            </TKEntityProperty>
+                        </TKPropertyGroup>
+                    </RadDataForm>
+                    <StackLayout >
+                            <Button  class="btn btn-primary" text="Create schedule" (tap)="onCreateButtonTap()"></Button>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+    </ScrollView>
+    <ActivityIndicator class="activity-indicator" [busy]="isLoading"></ActivityIndicator>
+</GridLayout>

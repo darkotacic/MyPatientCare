@@ -28,10 +28,9 @@
                 </ng-template>
             </lv:RadListView>
             <ActivityIndicator  class="activity-indicator" [busy]="isLoading"></ActivityIndicator>
-            <StackLayout class="float-btn-container">
-                <StackLayout  [ngClass]="selectedSchedule != null ? 'float-btn-edit':'float-btn'">
-                    <Label class="float-btn-text" [text]="buttonText"></Label>
-                </StackLayout>
+            <StackLayout *ngIf="(schedulesModel && schedulesModel.freeDays.freeDays.size > 0) || selectedSchedule != null" class="float-btn-container">
+                <Button [ngClass]="[selectedSchedule != null ? 'float-btn-edit':'float-btn', 'btn', 'btn-success','font-awesome']" [text]="buttonText" (tap)="onActionTap()">
+                </Button>
             </StackLayout>
         </StackLayout>
 </navigation:ExamplePage>

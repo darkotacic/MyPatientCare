@@ -1,3 +1,4 @@
+import { EditScheduleComponent } from './schedules/edit-schedule/edit-schedule.component';
 import { HolidaysComponent } from "./holidays/holidays.component";
 import { AppointmentsComponent } from "./appointments/appointments.component";
 import { SchedulesComponent } from "./schedules/schedules.component";
@@ -12,6 +13,8 @@ import { CareComponent } from "./care.component";
 import { AppointmentDetailComponent } from "./appointments/appoitment-detail/appointment-detail.component";
 import { ScheduleService } from "./schedules/shared/schedule.service";
 import { AppointmentService } from "./appointments/shared/appointment.service";
+import { NewScheduleComponent } from "./schedules/new-schedule/new-schedule.component";
+import { NativeScriptUIDataFormModule } from "nativescript-ui-dataform/angular/dataform-directives";
 
 @NgModule({
     imports: [
@@ -19,6 +22,7 @@ import { AppointmentService } from "./appointments/shared/appointment.service";
         NativeScriptUIGaugeModule,
         NativeScriptUIListViewModule,
         NativeScriptFormsModule,
+        NativeScriptUIDataFormModule,
         CareRoutingModule
     ],
     declarations: [
@@ -27,7 +31,9 @@ import { AppointmentService } from "./appointments/shared/appointment.service";
         SchedulesComponent,
         AppointmentsComponent,
         HolidaysComponent,
-        AppointmentDetailComponent
+        AppointmentDetailComponent,
+        NewScheduleComponent,
+        EditScheduleComponent
     ],
     providers: [
         ScheduleService,

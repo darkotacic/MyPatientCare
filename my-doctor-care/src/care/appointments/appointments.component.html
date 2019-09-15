@@ -4,7 +4,7 @@
     xmlns="http://www.nativescript.org/tns.xsd">
     <GridLayout rows="auto, *">
         <StackLayout orientation="vertical">
-            <Button  class="btn btn-primary" [text]="'Sort Options'" (tap)="sortOptions()" ios:margin="5"></Button>
+            <Button  class="btn btn-primary" text="Sort Options" (tap)="sortOptions()" ios:margin="5"></Button>
         </StackLayout>
         <ActivityIndicator rowSpan="2" class="activity-indicator" [busy]="isLoading"></ActivityIndicator>
         <lv:RadListView *ngIf="!isLoading" #myListView row="1" 

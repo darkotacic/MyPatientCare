@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using WebRegisterAPI.Models;
+using WebRegisterAPI.ViewModels;
 
 namespace WebRegisterAPI.Repositories.IRepositories
 {
@@ -9,5 +10,11 @@ namespace WebRegisterAPI.Repositories.IRepositories
         Schedule GetScheduleForDoctor(string doctorId, DayOfWeek dayOfWeek);
 
         IEnumerable<Schedule> GetAllSchedulesForDoctor(string doctorId);
+
+        Schedule GetScheduleById(int scheduleId);
+
+        FreeDaysViewModel GetFreeDaysForUser(string doctorId);
+        Schedule CreateSchedule(Schedule schedule);
+        Schedule UpdateSchedule(Schedule schedule);
     }
 }
