@@ -166,5 +166,15 @@ namespace WebRegisterAPI.Controllers
             }
             return NotFound(new { message = "No user with that id" });
         }
+
+        [HttpGet]
+        [Authorize]
+        [Route("UserInfo")]
+        public IActionResult GetDoctorById()
+        {
+            var claimsIdentity = this.User.Identity as ClaimsIdentity;
+            var userId = claimsIdentity.FindFirst("UserID")?.Value;
+            return GetUserById(userId);
+        }
     }
 }

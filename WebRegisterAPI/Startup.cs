@@ -69,6 +69,7 @@
             services.AddScoped<IHospitalService, HospitalService>();
             services.AddScoped<IHospitalRepositoy, HospitalRepository>();
             services.AddScoped<IHolidayRepository, HolidayRepository>();
+            services.AddScoped<IHolidayService, HolidayService>();
             services.AddScoped<IScheduleRepository, ScheduleRepository>();
             services.AddScoped<IScheduleService, ScheduleService>();
 

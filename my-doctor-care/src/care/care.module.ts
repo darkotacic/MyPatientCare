@@ -15,6 +15,7 @@ import { ScheduleService } from "./schedules/shared/schedule.service";
 import { AppointmentService } from "./appointments/shared/appointment.service";
 import { NewScheduleComponent } from "./schedules/new-schedule/new-schedule.component";
 import { NativeScriptUIDataFormModule } from "nativescript-ui-dataform/angular/dataform-directives";
+import { HolidayService } from './holidays/shared/holiday.service';
 
 @NgModule({
     imports: [
@@ -37,7 +38,8 @@ import { NativeScriptUIDataFormModule } from "nativescript-ui-dataform/angular/d
     ],
     providers: [
         ScheduleService,
-        AppointmentService
+        AppointmentService,
+        HolidayService
     ],
     schemas: [
         NO_ERRORS_SCHEMA

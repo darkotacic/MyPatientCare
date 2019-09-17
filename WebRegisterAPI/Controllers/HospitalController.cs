@@ -12,7 +12,7 @@ namespace WebRegisterAPI.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class HospitalController : ControllerBase
+    public class HospitalController : Controller
     {
         private readonly IHospitalService hospitalService;
         private readonly UserManager<ApplicationUser> userManage;

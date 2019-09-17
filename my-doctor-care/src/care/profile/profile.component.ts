@@ -1,3 +1,5 @@
+import { ConnectService } from './shared/connect.service';
+import { Contact } from './shared/contact.model';
 import { Component, OnInit } from "@angular/core";
 
 /* ***********************************************************
@@ -10,18 +12,26 @@ import { Component, OnInit } from "@angular/core";
 @Component({
     selector: "Profile",
     moduleId: module.id,
-    templateUrl: "./profile.component.html"
+    templateUrl: "./profile.component.html",
+    styleUrls: ["./profile.component.css"]
 })
 export class ProfileComponent implements OnInit {
-    constructor() {
-        /* ***********************************************************
-        * Use the constructor to inject app services that you need in this component.
-        *************************************************************/
+
+    contact: Contact;
+    private isLoading: boolean;
+
+    constructor(private connectService : ConnectService) {
     }
 
     ngOnInit(): void {
-        /* ***********************************************************
-        * Use the "ngOnInit" handler to initialize data for this component.
-        *************************************************************/
+        this.isLoading = true;
+        this.connectService.getUserInfo().subscribe(
+            (result:Contact)=>{
+                this.contact = result;
+                this.isLoading = false;
+            },
+            (error:any) => {
+                console.log(error);
+            });
     }
 }

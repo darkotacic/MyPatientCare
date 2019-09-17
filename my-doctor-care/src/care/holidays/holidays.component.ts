@@ -1,4 +1,7 @@
 import { Component, OnInit } from "@angular/core";
+import { ListViewEventData, RadListView } from "nativescript-ui-listview";
+import { Holiday } from "./shared/holiday.model";
+import { HolidayService } from "./shared/holiday.service";
 
 /* ***********************************************************
 * Before you can navigate to this page from your app, you need to reference this page's module in the
@@ -10,18 +13,40 @@ import { Component, OnInit } from "@angular/core";
 @Component({
     selector: "Holidays",
     moduleId: module.id,
-    templateUrl: "./holidays.component.html"
+    templateUrl: "./holidays.component.html",
+    styleUrls: ["./holidays.component.css"]
 })
 export class HolidaysComponent implements OnInit {
-    constructor() {
-        /* ***********************************************************
-        * Use the constructor to inject app services that you need in this component.
-        *************************************************************/
+    holidays : Array<Holiday>;
+    selectedHoliday: Holiday;
+    isLoading: boolean;
+    buttonText: string = "+";
+
+    constructor(private holidayService: HolidayService) {
+
     }
 
     ngOnInit(): void {
-        /* ***********************************************************
-        * Use the "ngOnInit" handler to initialize data for this component.
-        *************************************************************/
+        this.isLoading = true;
+        this.holidayService.getHolidays().subscribe(
+            (res: Array<Holiday>) => {
+                this.holidays = res;
+                this.isLoading = false;
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    }
+
+    onItemSelected(args: ListViewEventData) {
+        const listview = args.object as RadListView;
+        this.selectedHoliday = listview.getSelectedItems()[0] as Holiday;
+        this.buttonText = String.fromCharCode(0xf14b) + " Edit";
+    }
+
+    onitemDeselected() {
+        this.buttonText = "+";
+        this.selectedHoliday = null;
     }
 }
