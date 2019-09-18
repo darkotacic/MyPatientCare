@@ -1,3 +1,4 @@
+import { EditHolidayComponent } from './holidays/edit-holiday/edit-holiday.component';
 import { EditScheduleComponent } from './schedules/edit-schedule/edit-schedule.component';
 import { HolidaysComponent } from "./holidays/holidays.component";
 import { AppointmentsComponent } from "./appointments/appointments.component";
@@ -16,6 +17,7 @@ import { AppointmentService } from "./appointments/shared/appointment.service";
 import { NewScheduleComponent } from "./schedules/new-schedule/new-schedule.component";
 import { NativeScriptUIDataFormModule } from "nativescript-ui-dataform/angular/dataform-directives";
 import { HolidayService } from './holidays/shared/holiday.service';
+import { NewHolidayComponent } from './holidays/new-holiday/new-holiday.component';
 
 @NgModule({
     imports: [
@@ -34,7 +36,9 @@ import { HolidayService } from './holidays/shared/holiday.service';
         HolidaysComponent,
         AppointmentDetailComponent,
         NewScheduleComponent,
-        EditScheduleComponent
+        EditScheduleComponent,
+        NewHolidayComponent,
+        EditHolidayComponent
     ],
     providers: [
         ScheduleService,

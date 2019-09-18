@@ -35,5 +35,44 @@ namespace WebRegisterAPI.Controllers
             }
             return NotFound(new { message = "No logged in user" });
         }
+
+        [HttpPost]
+        public IActionResult CreateHoliday(Holiday holiday)
+        {
+            var claimsIdentity = User.Identity as ClaimsIdentity;
+            var userId = claimsIdentity.FindFirst("UserID")?.Value;
+            if (userId != null)
+            {
+                Holiday model = holidayService.CreateHoliday(holiday, userId);
+                return Ok(model);
+            }
+            return NotFound(new { message = "No logged in user" });
+        }
+
+        [HttpGet]
+        [Route("{holidayId}")]
+        public IActionResult GetHoliday(int holidayId)
+        {
+
+            Holiday holiday = holidayService.GetHolidayById(holidayId);
+            if (holiday != null)
+            {
+                return Ok(holiday);
+            }
+            return NotFound(new { message = "No holiday for the given id" });
+        }
+        [HttpPut]
+        public IActionResult UpdateHoliday(Holiday holiday)
+        {
+
+            var claimsIdentity = User.Identity as ClaimsIdentity;
+            var userId = claimsIdentity.FindFirst("UserID")?.Value;
+            if (userId != null)
+            {
+                Holiday newSchedule = holidayService.UpdateHoliday(holiday);
+                return Ok(newSchedule);
+            }
+            return NotFound(new { message = "No logged in user" });
+        }
     }
 }

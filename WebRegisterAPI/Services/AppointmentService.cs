@@ -116,7 +116,7 @@ namespace WebRegisterAPI.Services
                 DoctorId = doctor.Id,
                 AppointmentStatus = Status.PENDING.ToString(),
                 Date = date,
-                StringDate = date.ToString("MM/dd/yyyy HH:mm"),
+                StringDate = date.ToString("dd/MM/yyyy HH:mm"),
                 DoctorName = doctor.FullName,
                 TreatmentId = treatment.Id,
                 TreatmentName = treatment.Name
@@ -157,7 +157,7 @@ namespace WebRegisterAPI.Services
                         DoctorId = appointment.DoctorId,
                         AppointmentStatus = appointment.AppointmentStatus.ToString(),
                         Date = appointment.Date,
-                        StringDate = appointment.Date.ToString("MM/dd/yyyy HH:mm"),
+                        StringDate = appointment.Date.ToString("dd/MM/yyyy HH:mm"),
                         DoctorName = appointment.Doctor.FullName,
                         TreatmentId = appointment.TreatmentId,
                         TreatmentName = appointment.Treatment.Name,

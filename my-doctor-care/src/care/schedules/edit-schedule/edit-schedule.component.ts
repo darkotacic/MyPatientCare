@@ -61,15 +61,7 @@ export class EditScheduleComponent implements OnInit {
                     message: "Schedule updated successfully",
                     okButtonText: "Ok"
                 });
-                this._routerExtensions.navigate(["care"],
-                {
-                    animated: true,
-                    transition: {
-                        name: "slide",
-                        duration: 200,
-                        curve: "ease"
-                    }
-                });
+                this._routerExtensions.backToPreviousPage();
             },
             (error: any) => {
                 console.log(error);

@@ -1,3 +1,4 @@
+import { RouterExtensions } from 'nativescript-angular/router';
 import { Component, OnInit } from "@angular/core";
 import { ListViewEventData, RadListView } from "nativescript-ui-listview";
 import { Holiday } from "./shared/holiday.model";
@@ -22,7 +23,10 @@ export class HolidaysComponent implements OnInit {
     isLoading: boolean;
     buttonText: string = "+";
 
-    constructor(private holidayService: HolidayService) {
+    constructor(
+        private holidayService: HolidayService,
+        private router: RouterExtensions
+        ) {
 
     }
 
@@ -48,5 +52,47 @@ export class HolidaysComponent implements OnInit {
     onitemDeselected() {
         this.buttonText = "+";
         this.selectedHoliday = null;
+    }
+
+    onActionTap(){
+        if(this.selectedHoliday == null){
+            this.router.navigate([
+                "new-holiday"],
+                {
+                    animated: true,
+                    transition: {
+                        name: "slide",
+                        duration: 200,
+                        curve: "ease"
+                    }
+                });
+        } else {
+            this.router.navigate([
+                "edit-holiday",this.selectedHoliday.id],
+                {
+                    animated: true,
+                    transition: {
+                        name: "slide",
+                        duration: 200,
+                        curve: "ease"
+                    }
+                });
+        }
+    }
+
+    
+    public onPullToRefreshInitiated(args: ListViewEventData) {
+        this.holidayService.getHolidays().subscribe(
+            (res: Array<Holiday>) => {
+                this.holidays = res;
+                const listView = args.object;
+                this.selectedHoliday = null;
+                this.buttonText = "+";
+                listView.notifyPullToRefreshFinished();
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
     }
 }

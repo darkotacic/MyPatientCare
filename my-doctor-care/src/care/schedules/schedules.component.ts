@@ -69,4 +69,19 @@ export class SchedulesComponent implements OnInit {
                 });
         }
     }
+
+    public onPullToRefreshInitiated(args: ListViewEventData) {
+        this.scheduleService.getSchedules().subscribe(
+            (res: Schedules) => {
+                this.schedulesModel = res;
+                const listView = args.object;
+                this.selectedSchedule = null;
+                this.buttonText = "+";
+                listView.notifyPullToRefreshFinished();
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    }
 }

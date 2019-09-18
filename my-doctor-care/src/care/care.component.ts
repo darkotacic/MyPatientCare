@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ViewChild, ElementRef, OnInit, AfterViewInit } from "@angular/core";
 import { isAndroid } from "tns-core-modules/platform";
 import { SelectedIndexChangedEventData, TabView } from "tns-core-modules/ui/tab-view";
 import { RouterExtensions } from "nativescript-angular/router";
@@ -10,12 +10,16 @@ import { RouterExtensions } from "nativescript-angular/router";
     styleUrls: ["./care-common.css"]
 })
 export class CareComponent {
-    title: string;
-    readonly appSettings = require("tns-core-modules/application-settings");
 
+
+    title: string;
+    @ViewChild("tabView",{static: true}) tabView: ElementRef;
+    readonly appSettings = require("tns-core-modules/application-settings");
+    index: number;
     constructor(
         private _routerExtensions: RouterExtensions
-    ) { }
+    ) { 
+    }
 
     getIconSource(icon: string): string {
         return isAndroid ? "" : "res://tabIcons/" + icon;

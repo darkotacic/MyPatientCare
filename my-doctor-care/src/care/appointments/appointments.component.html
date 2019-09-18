@@ -12,6 +12,8 @@
                         [items]="dataItems" 
                         (itemSelected)="onItemSelected($event)"
                         enableCollapsibleGroups="true" 
+                        pullToRefresh="true"
+                        (pullToRefreshInitiated)="onPullToRefreshInitiated($event)"
                         [sortingFunction]="nameSortingFunc"
                         [groupingFunction]="myGroupingFunc" >
             <ng-template tkListItemTemplate let-item="item">

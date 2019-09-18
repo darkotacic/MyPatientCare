@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using WebRegisterAPI.Models;
 using WebRegisterAPI.Repositories.IRepositories;
 using WebRegisterAPI.Services.IServices;
@@ -17,10 +15,26 @@ namespace WebRegisterAPI.Services
         {
             this.holidayRepistory = holidayRepistory;
         }
+
+        public Holiday CreateHoliday(Holiday holiday, string userId)
+        {
+            return holidayRepistory.CreateHoliday(holiday, userId);
+        }
+
+        public Holiday GetHolidayById(int holidayId)
+        {
+            return holidayRepistory.GetHolidayById(holidayId);
+        }
+
         public List<HolidayViewModel> GetHolidays(string doctorId)
         {
             List<Holiday> holidays = holidayRepistory.GetHolidays(doctorId).ToList();
             return Map(holidays);
+        }
+
+        public Holiday UpdateHoliday(Holiday holiday)
+        {
+            return holidayRepistory.UpdateHoliday(holiday);
         }
 
         private List<HolidayViewModel> Map(List<Holiday> holidays)
@@ -35,8 +49,8 @@ namespace WebRegisterAPI.Services
                         StartDate = holiday.StartDate,
                         EndDate = holiday.EndDate,
                         Name = holiday.Name,
-                        StartDateString = holiday.StartDate.ToString("MM/dd/yyyy"),
-                        EndDateString = holiday.EndDate.ToString("MM/dd/yyyy")
+                        StartDateString = holiday.StartDate.ToString("dd/MM/yyyy"),
+                        EndDateString = holiday.EndDate.ToString("dd/MM/yyyy")
                     }
                );
             });

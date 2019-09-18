@@ -82,6 +82,19 @@ export class AppointmentsComponent implements OnInit {
         };
     }
 
+    public onPullToRefreshInitiated(args: ListViewEventData) {
+        this.appointmentService.getAppointments().subscribe(
+            (result: Array<Appointment>) => {
+                this._dataItems = new ObservableArray(result);
+                const listView = args.object;
+                listView.notifyPullToRefreshFinished();
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    }
+
     onItemSelected(args: ListViewEventData) {
         const listview = args.object as RadListView;
         const selectedAppointment = listview.getSelectedItems()[0] as Appointment;

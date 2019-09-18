@@ -172,7 +172,7 @@ namespace WebRegisterAPI.Controllers
         [Route("UserInfo")]
         public IActionResult GetDoctorById()
         {
-            var claimsIdentity = this.User.Identity as ClaimsIdentity;
+            var claimsIdentity = User.Identity as ClaimsIdentity;
             var userId = claimsIdentity.FindFirst("UserID")?.Value;
             return GetUserById(userId);
         }

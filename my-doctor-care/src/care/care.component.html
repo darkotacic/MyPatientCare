@@ -3,7 +3,7 @@
     <ActionItem (tap)="onLogOut()" ios.systemIcon="16" ios.position="right" text="Log Out" android.position="popup" ></ActionItem>
 </ActionBar>
 
-<TabView class="tab-view" (selectedIndexChanged)="onSelectedIndexChanged($event)">
+<TabView #tabView class="tab-view" (selectedIndexChanged)="onSelectedIndexChanged($event)">
 
 
     <StackLayout *tabItem="{title: 'Appointments', iconSource: getIconSource('search')}"> 

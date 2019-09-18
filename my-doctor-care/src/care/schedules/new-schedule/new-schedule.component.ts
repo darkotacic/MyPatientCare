@@ -68,15 +68,7 @@ export class NewScheduleComponent implements OnInit {
                     message: "Schedule created successfully",
                     okButtonText: "Ok"
                 });
-                this._routerExtensions.navigate(["care"],
-                {
-                    animated: true,
-                    transition: {
-                        name: "slide",
-                        duration: 200,
-                        curve: "ease"
-                    }
-                });
+                this._routerExtensions.backToPreviousPage();
             },
             (error: any) => {
                 console.log(error);

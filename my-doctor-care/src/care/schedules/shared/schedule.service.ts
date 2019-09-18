@@ -61,6 +61,6 @@ export class ScheduleService {
 
     updateSchedule(schedule: Schedule){
       return this.http.put(this.BaseURI+'/Schedule', schedule);
-  }
+    }
 
 }

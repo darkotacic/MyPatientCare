@@ -11,5 +11,8 @@ namespace WebRegisterAPI.Repositories.IRepositories
         bool CheckDateForUserHoliday(string doctorId, DateTime date);
 
         IEnumerable<Holiday> GetHolidays(string doctorId);
+        Holiday CreateHoliday(Holiday holiday, string userId);
+        Holiday GetHolidayById(int holidayId);
+        Holiday UpdateHoliday(Holiday holiday);
     }
 }

@@ -23,3 +23,16 @@ export class MinTimeValidator extends PropertyValidator {
         return number >= 0;
     }
 }
+
+export class MinDateValidator extends PropertyValidator {
+    constructor() {
+        super();
+        this.errorMessage = "Value for date cannot be less than today";
+    }
+
+    public validate(value: any, propertyName: string): boolean {
+        var date = new Date();
+        var myDate = new Date(value);
+        return myDate.getTime() > date.getTime();
+    }
+}
