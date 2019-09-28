@@ -118,4 +118,17 @@ export class AppointmentsComponent implements OnInit {
             }
         });
     }
+
+    onPullToRefreshInitiated(args: ListViewEventData) {
+        this.appointmentService.getAppointments().subscribe(
+            (result: Array<Appointment>) => {
+                this._dataItems = new ObservableArray(result);
+                const listView = args.object;
+                listView.notifyPullToRefreshFinished();
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    }
  }

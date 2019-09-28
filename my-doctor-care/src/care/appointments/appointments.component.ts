@@ -82,7 +82,7 @@ export class AppointmentsComponent implements OnInit {
         };
     }
 
-    public onPullToRefreshInitiated(args: ListViewEventData) {
+    onPullToRefreshInitiated(args: ListViewEventData) {
         this.appointmentService.getAppointments().subscribe(
             (result: Array<Appointment>) => {
                 this._dataItems = new ObservableArray(result);

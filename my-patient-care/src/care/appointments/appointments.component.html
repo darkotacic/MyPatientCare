@@ -11,6 +11,8 @@
                         selectionBehavior="Press"
                         [items]="dataItems" 
                         (itemSelected)="onItemSelected($event)"
+                        pullToRefresh="true"
+                        (pullToRefreshInitiated)="onPullToRefreshInitiated($event)"
                         enableCollapsibleGroups="true" 
                         [sortingFunction]="nameSortingFunc"
                         [groupingFunction]="myGroupingFunc" >
