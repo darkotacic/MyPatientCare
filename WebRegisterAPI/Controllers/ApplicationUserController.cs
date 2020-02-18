@@ -78,8 +78,6 @@ namespace WebRegisterAPI.Controllers
             var user = await _userManager.FindByNameAsync(model.UserName);
             if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
             {
-                //Sign in user
-                //await _singInManager.PasswordSignInAsync(model.UserName, model.Password, false, false);
                 //Get a role
                 var role = await _userManager.GetRolesAsync(user);
                 IdentityOptions _options = new IdentityOptions();

@@ -39,7 +39,7 @@ export class AppointmentService {
         {
             doctorId: appointment.doctorId,
             patientId: "0",
-            date: appointment.stringDate,
+            date: appointment.date,
             treatmentId: appointment.treatmentId,
         });
     }

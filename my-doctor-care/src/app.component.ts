@@ -8,8 +8,8 @@ export class AppComponent implements OnInit {
     readonly appSettings = require("tns-core-modules/application-settings");
 
     ngOnInit() {
-        if (this.appSettings.getString("BaseURI") !== "http://192.168.1.6:5000/api") {
-            this.appSettings.setString("BaseURI", "http://192.168.1.6:5000/api");
+        if (this.appSettings.getString("BaseURI") !== "http://192.168.1.4:5000/api") {
+            this.appSettings.setString("BaseURI", "http://192.168.1.4:5000/api");
         }
         console.log(this.appSettings.getString("BaseURI"));
     }
